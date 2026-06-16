@@ -1,0 +1,57 @@
+name: ShopNow Vulnerability Scan
+
+on:
+  push:
+    branches:
+      - main
+      - sprint1-clean
+
+  pull_request:
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Backend Scan
+      - name: Scan Backend Image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: fancy1505/shopnow-backend:v1
+          format: json
+          output: backend-report.json
+          severity: ${{ vars.SEVERITY_LEVEL }}
+          exit-code: 1
+
+      # Frontend Scan
+      - name: Scan Frontend Image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: fancy1505/shopnow-frontend:v1
+          format: json
+          output: frontend-report.json
+          severity: ${{ vars.SEVERITY_LEVEL }}
+          exit-code: 1
+
+      # Admin Scan
+      - name: Scan Admin Image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: fancy1505/shopnow-admin:v1
+          format: json
+          output: admin-report.json
+          severity: ${{ vars.SEVERITY_LEVEL }}
+          exit-code: 1
+
+      # Upload Reports
+      - name: Upload Scan Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-reports
+          path: |
+            backend-report.json
+            frontend-report.json
+            admin-report.json
