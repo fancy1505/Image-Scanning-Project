@@ -30,16 +30,15 @@ jobs:
 
       # Build Backend Image
       - name: Build Backend Image
-        run: docker build -t shopnow-backend:v1 ./shopNow/backend
+        run: docker build -t shopnow-backend:v1 ./backend
 
       # Build Frontend Image
       - name: Build Frontend Image
-        run: docker build -t shopnow-frontend:v1 ./shopNow/frontend
+        run: docker build -t shopnow-frontend:v1 ./frontend
 
       # Build Admin Image
       - name: Build Admin Image
-        run: docker build -t shopnow-admin:v1 ./shopNow/admin
-
+        run: docker build -t shopnow-admin:v1 ./admin
       # Scan Backend Image
       - name: Scan Backend Image
         uses: aquasecurity/trivy-action@master
