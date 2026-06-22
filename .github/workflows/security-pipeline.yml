@@ -9,14 +9,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # Checkout Repository
       - name: Checkout Code
         uses: actions/checkout@v4
+
 
       # Secret Scanning
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       # Filesystem Vulnerability Scan
       - name: Run Trivy FS Scan
@@ -28,17 +32,22 @@ jobs:
           severity: HIGH,CRITICAL
           exit-code: 0
 
+
       # Build Backend Image
       - name: Build Backend Image
-        run: docker build -t shopnow-backend:v1 ./backend
+        run: docker build -t shopnow-backend:v1 ./shopNow/backend
+
 
       # Build Frontend Image
       - name: Build Frontend Image
-        run: docker build -t shopnow-frontend:v1 ./frontend
+        run: docker build -t shopnow-frontend:v1 ./shopNow/frontend
+
 
       # Build Admin Image
       - name: Build Admin Image
-        run: docker build -t shopnow-admin:v1 ./admin
+        run: docker build -t shopnow-admin:v1 ./shopNow/admin
+
+
       # Scan Backend Image
       - name: Scan Backend Image
         uses: aquasecurity/trivy-action@master
@@ -48,6 +57,7 @@ jobs:
           format: json
           output: backend-report.json
           exit-code: 0
+
 
       # Scan Frontend Image
       - name: Scan Frontend Image
@@ -59,6 +69,7 @@ jobs:
           output: frontend-report.json
           exit-code: 0
 
+
       # Scan Admin Image
       - name: Scan Admin Image
         uses: aquasecurity/trivy-action@master
@@ -69,7 +80,8 @@ jobs:
           output: admin-report.json
           exit-code: 0
 
-      # Upload Reports
+
+      # Upload Security Reports
       - name: Upload Reports
         uses: actions/upload-artifact@v4
         with:
