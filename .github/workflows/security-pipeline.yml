@@ -1,0 +1,81 @@
+name: Security Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - sprint1-clean
+
+  pull_request:
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Secret Scanning
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+
+      # Filesystem Vulnerability Scan
+      - name: Run Trivy FS Scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: shopNow
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: 1
+
+      # Build Backend Image
+      - name: Build Backend Image
+        run: docker build -t shopnow-backend:v1 ./shopNow/backend
+
+      - name: Build Frontend Image
+        run: docker build -t shopnow-frontend:v1 ./shopNow/frontend
+
+      - name: Build Admin Image
+        run: docker build -t shopnow-admin:v1 ./shopNow/admin
+
+      # Backend Scan
+      - name: Scan Backend Image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: shopnow-backend:v1
+          severity: HIGH,CRITICAL
+          format: json
+          output: backend-report.json
+          exit-code: 1
+
+      # Frontend Scan
+      - name: Scan Frontend Image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: shopnow-frontend:v1
+          severity: HIGH,CRITICAL
+          format: json
+          output: frontend-report.json
+          exit-code: 1
+
+      # Admin Scan
+      - name: Scan Admin Image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: shopnow-admin:v1
+          severity: HIGH,CRITICAL
+          format: json
+          output: admin-report.json
+          exit-code: 1
+
+      # Upload Reports
+      - name: Upload Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            backend-report.json
+            frontend-report.json
+            admin-report.json
