@@ -3,10 +3,11 @@ name: Security Pipeline
 on:
   push:
     branches:
-      - main
-      - sprint1-clean
+      - "**"
 
   pull_request:
+      
+
 
 jobs:
   security-scan:
