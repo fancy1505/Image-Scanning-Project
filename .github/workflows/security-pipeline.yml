@@ -20,7 +20,7 @@ jobs:
 
       # Filesystem Vulnerability Scan
       - name: Run Trivy FS Scan
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           scan-type: fs
           scan-ref: shopNow
@@ -42,7 +42,7 @@ jobs:
 
       # Scan Backend Image
       - name: Scan Backend Image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: shopnow-backend:v1
           severity: HIGH,CRITICAL
@@ -52,7 +52,7 @@ jobs:
 
       # Scan Frontend Image
       - name: Scan Frontend Image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: shopnow-frontend:v1
           severity: HIGH,CRITICAL
@@ -62,7 +62,7 @@ jobs:
 
       # Scan Admin Image
       - name: Scan Admin Image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: shopnow-admin:v1
           severity: HIGH,CRITICAL
