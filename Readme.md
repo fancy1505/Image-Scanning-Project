@@ -2,124 +2,160 @@
 
 ## Project Overview
 
-The objective of Sprint 2 was to integrate automated security testing into the CI/CD pipeline using GitHub Actions. The pipeline performs secret detection, filesystem vulnerability scanning, container security scanning, and report generation following DevSecOps best practices.
+The objective of Sprint 2 was to integrate automated security testing into the CI/CD pipeline using GitHub Actions. The implementation follows DevSecOps principles by embedding security controls directly into the software delivery lifecycle.
 
----
-# Project Directory Structure
-
-```text
-Container-Vulnerability-Scanner/
-│
-├── .github/
-│   └── workflows/
-│       └── security-pipeline.yml
-│
-├── reports/
-│   ├── backend-report.json
-│   ├── frontend-report.json
-│   ├── admin-report.json
-│   └── trivy-fs-report.json
-│
-├── shopNow/
-│   ├── backend/
-│   ├── frontend/
-│   ├── admin/
-│   └── docs/
-│
-├── sonar-project.properties
-├── README.md
-└── .gitignore
-```
-
-## Directory Description
-
-### .github/workflows/
-
-Contains GitHub Actions workflow definitions used for CI/CD automation.
-
-### security-pipeline.yml
-
-Main security pipeline workflow responsible for:
+The security pipeline automatically performs:
 
 * Secret scanning using Gitleaks
+* Static code analysis preparation using SonarQube
 * Filesystem vulnerability scanning using Trivy
-* Docker image building
-* Container vulnerability scanning
+* Docker image security scanning
 * Security report generation
-* Artifact upload
+* Artifact storage for auditing and compliance
 
-### reports/
-
-Stores security reports generated during scanning activities.
-
-Generated Reports:
-
-* backend-report.json
-* frontend-report.json
-* admin-report.json
-* trivy-fs-report.json
-
-### shopNow/
-
-Contains the application source code.
-
-#### backend/
-
-Node.js backend application.
-
-#### frontend/
-
-Frontend web application.
-
-#### admin/
-
-Administrative dashboard application.
-
-#### docs/
-
-Project documentation and supporting files.
-
-### sonar-project.properties
-
-Configuration file used by SonarQube for static code analysis.
-
-### .gitignore
-
-Defines files and folders excluded from version control.
-
-### README.md
-
-Project documentation containing implementation details, screenshots, scan results, findings, and conclusions.
-
+This automation helps identify vulnerabilities and exposed secrets early in the development process before deployment.
 
 # Architecture
 
+```text
 Developer Push
-↓
+      │
+      ▼
 GitHub Actions
-↓
+      │
+      ▼
 Checkout Repository
-↓
+      │
+      ▼
 Gitleaks Secret Scan
-↓
+      │
+      ▼
 Trivy Filesystem Scan
-↓
+      │
+      ▼
 Docker Image Build
-↓
+      │
+      ▼
 Container Vulnerability Scan
-↓
-Upload Security Reports
+      │
+      ▼
+Generate Reports
+      │
+      ▼
+Upload Security Artifacts
+```
 
 ---
 
 # Technologies Used
 
-* GitHub Actions
-* Docker
-* Trivy
-* Gitleaks
-* GitHub Artifacts
-* sonarqube
+| Tool             | Purpose                   |
+| ---------------- | ------------------------- |
+| GitHub Actions   | CI/CD workflow automation |
+| Docker           | Containerization platform |
+| Trivy            | Vulnerability scanning    |
+| Gitleaks         | Secret detection          |
+| SonarQube        | Static code analysis      |
+| GitHub Artifacts | Security report storage   |
+
+---
+
+# Tool Description and Purpose
+
+## GitHub Actions
+
+GitHub Actions is used to automate the execution of security checks whenever code is pushed or a pull request is created.
+
+Responsibilities:
+
+* Execute security workflow
+* Build Docker images
+* Run vulnerability scans
+* Upload security reports
+
+---
+
+## Gitleaks
+
+Gitleaks detects sensitive information accidentally committed to source code repositories.
+
+Security Checks:
+
+* API Keys
+* Passwords
+* Tokens
+* Secrets
+* Credentials
+
+Purpose:
+
+Prevent credential leakage and improve repository security.
+
+---
+
+## Trivy
+
+Trivy is an open-source vulnerability scanner used for filesystem and container security scanning.
+
+Security Checks:
+
+* Vulnerable packages
+* Dependency CVEs
+* Operating system vulnerabilities
+* Container image vulnerabilities
+
+Purpose:
+
+Identify HIGH and CRITICAL vulnerabilities before deployment.
+
+---
+
+## Docker
+
+Docker packages applications into containers that can be scanned and deployed consistently.
+
+Images Built:
+
+* shopnow-backend:v1
+* shopnow-frontend:v1
+* shopnow-admin:v1
+
+Purpose:
+
+Provide isolated environments and enable container security scanning.
+
+---
+
+## SonarQube
+
+SonarQube provides static code analysis and code quality assessment.
+
+Analysis Areas:
+
+* Bugs
+* Code Smells
+* Vulnerabilities
+* Security Hotspots
+* Maintainability Issues
+
+Purpose:
+
+Improve code quality and identify security weaknesses.
+
+---
+
+## GitHub Artifacts
+
+GitHub Artifacts store generated reports from workflow executions.
+
+Artifacts Generated:
+
+* gitleaks-results.sarif
+* security-reports
+
+Purpose:
+
+Support auditing and historical security tracking.
 
 ---
 
@@ -139,9 +175,6 @@ Workflow File:
 ```yaml
 .github/workflows/security-pipeline.yml
 ```
-
-[PASTE SCREENSHOT 2 – SECURITY PIPELINE YAML HERE]
-
 Description:
 GitHub Actions workflow implementing automated security scanning.
 <img width="1206" height="1500" alt="image" src="https://github.com/user-attachments/assets/5faf0c1d-2373-4983-ba7c-c2c52877529e" />
@@ -333,16 +366,15 @@ git push origin sprint2-security-pipeline
 <img width="1674" height="819" alt="image" src="https://github.com/user-attachments/assets/a25ee3f3-ae39-4731-b3c4-795da78716bd" />
 
 
----
-
 # Challenges Faced
 
 1. Java installation and configuration for SonarScanner.
-2. SonarScanner setup and PATH configuration.
+2. SonarScanner PATH configuration.
 3. GitHub Actions workflow debugging.
 4. Trivy action version compatibility issues.
-5. Docker build path troubleshooting.
-6. Security report generation and artifact upload configuration.
+5. Docker image build path troubleshooting.
+6. GitHub artifact upload configuration.
+7. Vulnerability report generation and validation.
 
 ---
 
@@ -350,14 +382,19 @@ git push origin sprint2-security-pipeline
 
 * GitHub Actions workflow development
 * DevSecOps implementation
-* Secret detection with Gitleaks
-* Vulnerability assessment using Trivy
-* Docker security scanning
-* Artifact management in GitHub Actions
+* Secret detection using Gitleaks
+* Filesystem vulnerability scanning
+* Container image security scanning
+* SonarQube integration
+* Artifact management
 * CI/CD security automation
+* Security report generation
+* Vulnerability assessment and analysis
 
 ---
 
 # Conclusion
 
-Sprint 2 successfully integrated automated security testing into the CI/CD pipeline. Security scans now execute automatically during code changes, helping identify vulnerabilities and secrets early in the software development lifecycle while generating downloadable security reports for auditing and remediation.
+Sprint 2 successfully integrated automated security testing into the CI/CD pipeline using GitHub Actions. Security checks are now executed automatically whenever code changes are introduced, ensuring continuous monitoring of source code, dependencies, and container images.
+
+The implementation demonstrates DevSecOps best practices by combining secret scanning, vulnerability assessment, static analysis preparation, automated reporting, and artifact management into a unified security pipeline. This approach improves application security, enhances code quality, and enables early detection of security issues throughout the software development lifecycle.
