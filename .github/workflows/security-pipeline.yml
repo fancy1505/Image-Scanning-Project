@@ -1,92 +1,117 @@
 name: Security Pipeline
 
 on:
-  push:
-  pull_request:
+push:
+pull_request:
 
 jobs:
-  security-scan:
-    runs-on: ubuntu-latest
+security-scan:
+runs-on: ubuntu-latest
 
-    steps:
+```
+steps:
 
-      # Checkout Repository
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-
-      # Secret Scanning
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # Checkout Repository
+  - name: Checkout Code
+    uses: actions/checkout@v4
+    with:
+      fetch-depth: 0
 
 
-      # Filesystem Vulnerability Scan
-      - name: Run Trivy FS Scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: fs
-          scan-ref: shopNow
-          format: table
-          severity: HIGH,CRITICAL
-          exit-code: 0
+  # Secret Scanning
+  - name: Run Gitleaks
+    uses: gitleaks/gitleaks-action@v2
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  
 
-      # Build Backend Image
-      - name: Build Backend Image
-        run: docker build -t shopnow-backend:v1 ./shopNow/backend
+  # Filesystem Vulnerability Scan
+  - name: Run Trivy FS Scan
+    uses: aquasecurity/trivy-action@master
+    with:
+      scan-type: fs
+      scan-ref: shopNow
+      format: json
+      output: trivy-fs-report.json
+      severity: HIGH,CRITICAL
+      exit-code: 0
 
+  # Build Backend Image
+  - name: Build Backend Image
+    run: docker build -t shopnow-backend:v1 ./shopNow/backend
 
-      # Build Frontend Image
-      - name: Build Frontend Image
-        run: docker build -t shopnow-frontend:v1 ./shopNow/frontend
+  # Build Frontend Image
+  - name: Build Frontend Image
+    run: docker build -t shopnow-frontend:v1 ./shopNow/frontend
 
+  # Build Admin Image
+  - name: Build Admin Image
+    run: docker build -t shopnow-admin:v1 ./shopNow/admin
 
-      # Build Admin Image
-      - name: Build Admin Image
-        run: docker build -t shopnow-admin:v1 ./shopNow/admin
+  # Scan Backend Image
+  - name: Scan Backend Image
+    uses: aquasecurity/trivy-action@master
+    with:
+      image-ref: shopnow-backend:v1
+      severity: HIGH,CRITICAL
+      format: json
+      output: backend-report.json
+      exit-code: 0
 
+  # Scan Frontend Image
+  - name: Scan Frontend Image
+    uses: aquasecurity/trivy-action@master
+    with:
+      image-ref: shopnow-frontend:v1
+      severity: HIGH,CRITICAL
+      format: json
+      output: frontend-report.json
+      exit-code: 0
 
-      # Scan Backend Image
-      - name: Scan Backend Image
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: shopnow-backend:v1
-          severity: HIGH,CRITICAL
-          format: json
-          output: backend-report.json
-          exit-code: 0
+  # Scan Admin Image
+  - name: Scan Admin Image
+    uses: aquasecurity/trivy-action@master
+    with:
+      image-ref: shopnow-admin:v1
+      severity: HIGH,CRITICAL
+      format: json
+      output: admin-report.json
+      exit-code: 0
 
+  # Setup Python
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: '3.12'
 
-      # Scan Frontend Image
-      - name: Scan Frontend Image
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: shopnow-frontend:v1
-          severity: HIGH,CRITICAL
-          format: json
-          output: frontend-report.json
-          exit-code: 0
+  # Install Dependencies
+  - name: Install Dependencies
+    run: |
+      pip install requests
 
+  # Generate Reports
+  - name: Generate Reports
+    run: |
+      python scripts/report_generator.py
 
-      # Scan Admin Image
-      - name: Scan Admin Image
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: shopnow-admin:v1
-          severity: HIGH,CRITICAL
-          format: json
-          output: admin-report.json
-          exit-code: 0
+  # Send Slack Notification
+  - name: Send Slack Notification
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    run: |
+      python scripts/slack_notify.py
 
-
-      # Upload Security Reports
-      - name: Upload Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: security-reports
-          path: |
-            backend-report.json
-            frontend-report.json
-            admin-report.json
+  # Upload Security Reports
+  - name: Upload Reports
+    uses: actions/upload-artifact@v4
+    with:
+      name: security-reports
+      path: |
+        backend-report.json
+        frontend-report.json
+        admin-report.json
+        trivy-fs-report.json
+        reports/summary-report.json
+        reports/consolidated-report.html
+```
