@@ -25,6 +25,6 @@ response = requests.post(
     json={"text": message}
 )
 
-print("Slack notification sent.")S
+print("Slack notification sent.")
 print("Status:", response.status_code)
 print("Response:", response.text)
