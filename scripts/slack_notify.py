@@ -28,3 +28,5 @@ response = requests.post(
 print("Slack notification sent.")
 print("Status:", response.status_code)
 print("Response:", response.text)
+print("Webhook exists:", WEBHOOK_URL is not None)
+print("Webhook starts with https:", str(WEBHOOK_URL).startswith("https"))
