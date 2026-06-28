@@ -171,42 +171,54 @@ The DevSecOps pipeline now provides continuous visibility into container securit
 
 ## Screenshot 1 – Successful GitHub Actions Pipeline
 
-Paste screenshot here.
+<img width="2877" height="1532" alt="image" src="https://github.com/user-attachments/assets/871c0561-ddf1-4ec3-8f38-f7ad6ce11ff7" />
+<img width="2873" height="1494" alt="image" src="https://github.com/user-attachments/assets/f6d80444-8c24-409f-8750-3e67a4984a7a" />
+<img width="1881" height="1620" alt="image" src="https://github.com/user-attachments/assets/4ce8e1e5-2037-4be8-903c-871593700cf6" />
+
+<img width="1523" height="1010" alt="image" src="https://github.com/user-attachments/assets/7bfc2433-3fa8-42d5-89d8-2d576a0d4572" />
 
 ---
 
 ## Screenshot 2 – Generate Reports Stage
 
-Paste screenshot here.
+
+<img width="1588" height="1428" alt="image" src="https://github.com/user-attachments/assets/91078d49-808c-4398-b46f-6d70e779864e" />
+<img width="1860" height="1442" alt="image" src="https://github.com/user-attachments/assets/aa57607d-e161-416d-9c05-eb9658561ff0" />
+
+<img width="2315" height="1381" alt="image" src="https://github.com/user-attachments/assets/6fdef699-f4f8-4f8a-b1fb-0d9d89dbeb17" />
 
 ---
 
 ## Screenshot 3 – Slack Notification Received
 
-Paste screenshot here.
+<img width="2308" height="328" alt="image" src="https://github.com/user-attachments/assets/265a4771-40b1-4f00-980f-f585fc1809a3" />
+<img width="2099" height="972" alt="image" src="https://github.com/user-attachments/assets/1b352150-02d0-4b48-97dd-ad7106893ffe" />
+
 
 ---
 
 ## Screenshot 4 – Generated Reports Folder
 
-Paste screenshot here.
+<img width="1930" height="1127" alt="image" src="https://github.com/user-attachments/assets/116555fd-7ae6-447f-a24e-e3cbe73f9e32" />
 
 ---
 
 ## Screenshot 5 – HTML Vulnerability Report
 
-Paste screenshot here.
+<img width="2853" height="945" alt="image" src="https://github.com/user-attachments/assets/527eef75-7744-4a65-94fe-a7d2e6cd06a7" />
+
 
 ---
 
 ## Screenshot 6 – GitHub Artifacts
 
-Paste screenshot here.
+<img width="2362" height="524" alt="image" src="https://github.com/user-attachments/assets/1b026437-00c9-4aec-9bea-b15f8a9aa9a2" />
+
 
 ---
 
 ## Screenshot 7 – GitHub Secret Configuration
+<img width="1701" height="994" alt="image" src="https://github.com/user-attachments/assets/94b6fab4-a86a-40ea-8c3b-e8d8336009cd" />
 
-Paste screenshot here (hide secret value).
 
 ---
