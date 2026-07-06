@@ -17,10 +17,21 @@ jobs:
           fetch-depth: 0
 
       # Secret Scanning
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Install Gitleaks
+- name: Install Gitleaks
+  run: |
+    wget https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_linux_x64.tar.gz
+    tar -xzf gitleaks_linux_x64.tar.gz
+    sudo mv gitleaks /usr/local/bin/
+
+# Run Gitleaks and generate report
+- name: Run Gitleaks
+  run: |
+    mkdir -p reports
+    gitleaks detect \
+      --source . \
+      --report-format json \
+      --report-path reports/gitleaks-report.json
 
       # Filesystem Vulnerability Scan
       - name: Run Trivy FS Scan
@@ -110,3 +121,4 @@ jobs:
             trivy-fs-report.json
             reports/summary-report.json
             reports/consolidated-report.html
+            reports/gitleaks-report.json
