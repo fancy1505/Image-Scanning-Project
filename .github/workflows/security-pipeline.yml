@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      -       - name: Run GitLeaks Secret Scan
+      - name: Run GitLeaks Secret Scan
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -94,6 +94,5 @@ jobs:
             frontend-report.json
             admin-report.json
             trivy-fs-report.json
-            reports/gitleaks-report.json
             reports/summary-report.json
             reports/consolidated-report.html
