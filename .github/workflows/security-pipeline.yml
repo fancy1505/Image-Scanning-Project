@@ -9,32 +9,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      # Checkout Repository
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Secret Scanning
-      # Install Gitleaks
-- name: Install Gitleaks
-  run: |
-    wget https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_linux_x64.tar.gz
-    tar -xzf gitleaks_linux_x64.tar.gz
-    sudo mv gitleaks /usr/local/bin/
+      - name: Install Gitleaks
+        run: |
+          wget https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_linux_x64.tar.gz
+          tar -xzf gitleaks_linux_x64.tar.gz
+          sudo mv gitleaks /usr/local/bin/gitleaks
+          gitleaks version
 
-# Run Gitleaks and generate report
-- name: Run Gitleaks
-  run: |
-    mkdir -p reports
-    gitleaks detect \
-      --source . \
-      --report-format json \
-      --report-path reports/gitleaks-report.json
+      - name: Run Gitleaks Secret Scan
+        run: |
+          mkdir -p reports
+          gitleaks detect --source . --report-format json --report-path reports/gitleaks-report.json --no-git
+        continue-on-error: true
 
-      # Filesystem Vulnerability Scan
-      - name: Run Trivy FS Scan
+      - name: Run Trivy Filesystem Scan
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: fs
@@ -44,19 +37,15 @@ jobs:
           severity: HIGH,CRITICAL
           exit-code: 0
 
-      # Build Backend Image
       - name: Build Backend Image
         run: docker build -t shopnow-backend:v1 ./shopNow/backend
 
-      # Build Frontend Image
       - name: Build Frontend Image
         run: docker build -t shopnow-frontend:v1 ./shopNow/frontend
 
-      # Build Admin Image
       - name: Build Admin Image
         run: docker build -t shopnow-admin:v1 ./shopNow/admin
 
-      # Scan Backend Image
       - name: Scan Backend Image
         uses: aquasecurity/trivy-action@master
         with:
@@ -66,7 +55,6 @@ jobs:
           output: backend-report.json
           exit-code: 0
 
-      # Scan Frontend Image
       - name: Scan Frontend Image
         uses: aquasecurity/trivy-action@master
         with:
@@ -76,7 +64,6 @@ jobs:
           output: frontend-report.json
           exit-code: 0
 
-      # Scan Admin Image
       - name: Scan Admin Image
         uses: aquasecurity/trivy-action@master
         with:
@@ -86,31 +73,26 @@ jobs:
           output: admin-report.json
           exit-code: 0
 
-      # Setup Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      # Install Dependencies
       - name: Install Dependencies
         run: |
           pip install requests
 
-      # Generate Reports
       - name: Generate Reports
         run: |
           python scripts/report_generator.py
 
-      # Send Slack Notification
       - name: Send Slack Notification
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
           python scripts/slack_notify.py
 
-      # Upload Security Reports
-      - name: Upload Reports
+      - name: Upload Security Reports
         uses: actions/upload-artifact@v4
         with:
           name: security-reports
@@ -119,6 +101,6 @@ jobs:
             frontend-report.json
             admin-report.json
             trivy-fs-report.json
+            reports/gitleaks-report.json
             reports/summary-report.json
             reports/consolidated-report.html
-            reports/gitleaks-report.json
