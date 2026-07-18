@@ -1,0 +1,2053 @@
+﻿{
+    "meta":  {
+                 "type":  "db",
+                 "canSave":  true,
+                 "canEdit":  true,
+                 "canAdmin":  true,
+                 "canStar":  true,
+                 "canDelete":  true,
+                 "slug":  "scanguard-ai-devsecops-security-dashboard",
+                 "url":  "/d/scanguard-ai-devsecops/scanguard-ai-devsecops-security-dashboard",
+                 "expires":  "0001-01-01T00:00:00Z",
+                 "created":  "2026-07-06T16:43:23Z",
+                 "updated":  "2026-07-13T16:25:24Z",
+                 "updatedBy":  "admin",
+                 "createdBy":  "admin",
+                 "version":  19,
+                 "hasAcl":  false,
+                 "isFolder":  false,
+                 "apiVersion":  "v0alpha1",
+                 "folderId":  0,
+                 "folderUid":  "",
+                 "folderTitle":  "General",
+                 "folderUrl":  "",
+                 "provisioned":  false,
+                 "provisionedExternalId":  "",
+                 "annotationsPermissions":  {
+                                                "dashboard":  {
+                                                                  "canAdd":  true,
+                                                                  "canEdit":  true,
+                                                                  "canDelete":  true
+                                                              }
+                                            }
+             },
+    "dashboard":  {
+                      "annotations":  {
+                                          "list":  [
+                                                       {
+                                                           "builtIn":  1,
+                                                           "datasource":  {
+                                                                              "type":  "grafana",
+                                                                              "uid":  "-- Grafana --"
+                                                                          },
+                                                           "enable":  true,
+                                                           "hide":  true,
+                                                           "iconColor":  "rgba(0, 211, 255, 1)",
+                                                           "name":  "Annotations \u0026 Alerts",
+                                                           "type":  "dashboard"
+                                                       }
+                                                   ]
+                                      },
+                      "editable":  true,
+                      "fiscalYearStartMonth":  0,
+                      "graphTooltip":  0,
+                      "id":  2485421403303936,
+                      "liveNow":  false,
+                      "panels":  [
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "blue",
+                                                                                                                   "value":  1
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  4,
+                                                         "w":  4,
+                                                         "x":  0,
+                                                         "y":  0
+                                                     },
+                                         "id":  1,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "editorMode":  "code",
+                                                             "expr":  "trivy_images_scanned_total{}",
+                                                             "range":  true,
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Images Scanned",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  6
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  11
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  4,
+                                                         "w":  4,
+                                                         "x":  4,
+                                                         "y":  0
+                                                     },
+                                         "id":  2,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_critical_vulnerabilities",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Critical Vulnerabilities",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  21
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  51
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  101
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  4,
+                                                         "w":  4,
+                                                         "x":  8,
+                                                         "y":  0
+                                                     },
+                                         "id":  3,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_high_vulnerabilities",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "High Vulnerabilities",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  51
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  151
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  251
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  4,
+                                                         "w":  4,
+                                                         "x":  12,
+                                                         "y":  0
+                                                     },
+                                         "id":  4,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_medium_vulnerabilities",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Medium Vulnerabilities",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  101
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  301
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  501
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  4,
+                                                         "w":  4,
+                                                         "x":  16,
+                                                         "y":  0
+                                                     },
+                                         "id":  5,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_low_vulnerabilities",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Low Vulnerabilities",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  3
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  6
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  4,
+                                                         "w":  4,
+                                                         "x":  20,
+                                                         "y":  0
+                                                     },
+                                         "id":  6,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_failed_images_total",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Failed Images",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  4
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  8
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  4,
+                                                         "w":  4,
+                                                         "x":  0,
+                                                         "y":  4
+                                                     },
+                                         "id":  7,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_passed_images_total",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Passed Images",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "max":  2000,
+                                                                              "min":  0,
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  201
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  601
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  1201
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  8,
+                                                         "w":  8,
+                                                         "x":  4,
+                                                         "y":  4
+                                                     },
+                                         "id":  8,
+                                         "options":  {
+                                                         "barShape":  "flat",
+                                                         "barWidthFactor":  0.5,
+                                                         "effects":  {
+                                                                         "barGlow":  false,
+                                                                         "centerGlow":  false,
+                                                                         "gradient":  true
+                                                                     },
+                                                         "endpointMarker":  "point",
+                                                         "minVizHeight":  75,
+                                                         "minVizWidth":  75,
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "segmentCount":  1,
+                                                         "segmentSpacing":  0.3,
+                                                         "shape":  "gauge",
+                                                         "showThresholdLabels":  false,
+                                                         "showThresholdMarkers":  true,
+                                                         "sizing":  "auto",
+                                                         "sparkline":  true,
+                                                         "textMode":  "auto"
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_risk_score",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Overall Risk Score",
+                                         "type":  "gauge"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "palette-classic"
+                                                                                        },
+                                                                              "custom":  {
+                                                                                             "axisBorderShow":  false,
+                                                                                             "axisCenteredZero":  false,
+                                                                                             "axisColorMode":  "text",
+                                                                                             "axisLabel":  "",
+                                                                                             "axisPlacement":  "auto",
+                                                                                             "barAlignment":  0,
+                                                                                             "barWidthFactor":  0.6,
+                                                                                             "drawStyle":  "line",
+                                                                                             "fillOpacity":  10,
+                                                                                             "gradientMode":  "none",
+                                                                                             "hideFrom":  {
+                                                                                                              "legend":  false,
+                                                                                                              "tooltip":  false,
+                                                                                                              "viz":  false
+                                                                                                          },
+                                                                                             "insertNulls":  false,
+                                                                                             "lineInterpolation":  "linear",
+                                                                                             "lineWidth":  2,
+                                                                                             "pointSize":  5,
+                                                                                             "scaleDistribution":  {
+                                                                                                                       "type":  "linear"
+                                                                                                                   },
+                                                                                             "showPoints":  "auto",
+                                                                                             "showValues":  false,
+                                                                                             "spanNulls":  false,
+                                                                                             "stacking":  {
+                                                                                                              "group":  "A",
+                                                                                                              "mode":  "none"
+                                                                                                          },
+                                                                                             "thresholdsStyle":  {
+                                                                                                                     "mode":  "off"
+                                                                                                                 }
+                                                                                         },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  8,
+                                                         "w":  12,
+                                                         "x":  12,
+                                                         "y":  4
+                                                     },
+                                         "id":  9,
+                                         "options":  {
+                                                         "annotations":  {
+                                                                             "clustering":  -1,
+                                                                             "multiLane":  false
+                                                                         },
+                                                         "legend":  {
+                                                                        "calcs":  [
+
+                                                                                  ],
+                                                                        "displayMode":  "list",
+                                                                        "enableFacetedFilter":  false,
+                                                                        "overflow":  "ellipsis",
+                                                                        "placement":  "bottom",
+                                                                        "showLegend":  true
+                                                                    },
+                                                         "tooltip":  {
+                                                                         "hideZeros":  false,
+                                                                         "mode":  "single",
+                                                                         "sort":  "none"
+                                                                     }
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_total_vulnerabilities",
+                                                             "legendFormat":  "Total Vulnerabilities",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Vulnerability Trend",
+                                         "type":  "timeseries"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "custom":  {
+                                                                                             "align":  "auto",
+                                                                                             "cellOptions":  {
+                                                                                                                 "type":  "auto"
+                                                                                                             },
+                                                                                             "footer":  {
+                                                                                                            "reducers":  [
+
+                                                                                                                         ]
+                                                                                                        },
+                                                                                             "inspect":  false
+                                                                                         },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  1
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  9,
+                                                         "w":  12,
+                                                         "x":  0,
+                                                         "y":  12
+                                                     },
+                                         "id":  10,
+                                         "options":  {
+                                                         "cellHeight":  "sm",
+                                                         "showHeader":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_image_vulnerabilities",
+                                                             "format":  "table",
+                                                             "instant":  true,
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Top Vulnerable Images by Severity",
+                                         "transformations":  [
+                                                                 {
+                                                                     "id":  "organize",
+                                                                     "options":  {
+                                                                                     "excludeByName":  {
+                                                                                                           "Time":  true,
+                                                                                                           "__name__":  true,
+                                                                                                           "instance":  true,
+                                                                                                           "job":  true
+                                                                                                       },
+                                                                                     "indexByName":  {
+
+                                                                                                     },
+                                                                                     "renameByName":  {
+                                                                                                          "Value":  "Count",
+                                                                                                          "image":  "Image / Report",
+                                                                                                          "severity":  "Severity"
+                                                                                                      }
+                                                                                 }
+                                                                 }
+                                                             ],
+                                         "type":  "table"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "custom":  {
+                                                                                             "axisBorderShow":  false,
+                                                                                             "axisCenteredZero":  false,
+                                                                                             "axisColorMode":  "text",
+                                                                                             "axisLabel":  "",
+                                                                                             "axisPlacement":  "auto",
+                                                                                             "fillOpacity":  80,
+                                                                                             "gradientMode":  "none",
+                                                                                             "hideFrom":  {
+                                                                                                              "legend":  false,
+                                                                                                              "tooltip":  false,
+                                                                                                              "viz":  false
+                                                                                                          },
+                                                                                             "lineWidth":  1,
+                                                                                             "scaleDistribution":  {
+                                                                                                                       "type":  "linear"
+                                                                                                                   },
+                                                                                             "thresholdsStyle":  {
+                                                                                                                     "mode":  "off"
+                                                                                                                 }
+                                                                                         },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  10
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  25
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  9,
+                                                         "w":  12,
+                                                         "x":  12,
+                                                         "y":  12
+                                                     },
+                                         "id":  11,
+                                         "options":  {
+                                                         "barRadius":  0,
+                                                         "barWidth":  0.97,
+                                                         "fullHighlight":  false,
+                                                         "groupWidth":  0.7,
+                                                         "legend":  {
+                                                                        "calcs":  [
+
+                                                                                  ],
+                                                                        "displayMode":  "list",
+                                                                        "overflow":  "ellipsis",
+                                                                        "placement":  "bottom",
+                                                                        "showLegend":  true
+                                                                    },
+                                                         "orientation":  "auto",
+                                                         "showValue":  "auto",
+                                                         "stacking":  "none",
+                                                         "tooltip":  {
+                                                                         "hideZeros":  false,
+                                                                         "mode":  "single",
+                                                                         "sort":  "none"
+                                                                     },
+                                                         "xTickLabelRotation":  0,
+                                                         "xTickLabelSpacing":  0
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "sum by (image) (trivy_image_vulnerabilities)",
+                                                             "instant":  true,
+                                                             "legendFormat":  "{{image}}",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Most Vulnerable Reports / Images",
+                                         "type":  "barchart"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  5
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  10
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  6,
+                                                         "w":  6,
+                                                         "x":  0,
+                                                         "y":  21
+                                                     },
+                                         "id":  12,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_fs_critical_vulnerabilities",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "FS Critical Vulnerabilities",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "efracgbdr7dogb"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  0
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  10
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  30
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  50
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          }
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  6,
+                                                         "w":  6,
+                                                         "x":  6,
+                                                         "y":  21
+                                                     },
+                                         "id":  13,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "percentChangeColorMode":  "standard",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "showPercentChange":  false,
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "efracgbdr7dogb"
+                                                                            },
+                                                             "expr":  "trivy_fs_high_vulnerabilities",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "FS High Vulnerabilities",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "gridPos":  {
+                                                         "h":  6,
+                                                         "w":  12,
+                                                         "x":  12,
+                                                         "y":  21
+                                                     },
+                                         "id":  14,
+                                         "options":  {
+                                                         "code":  {
+                                                                      "language":  "plaintext",
+                                                                      "showLineNumbers":  false,
+                                                                      "showMiniMap":  false
+                                                                  },
+                                                         "content":  "Security Pipeline Status\\n\\nGitHub Actions: Enabled\\nGitLeaks Secret Scan: Enabled\\nTrivy FS Scan: Enabled\\nDocker Image Scan: Enabled\\nSlack Notification: Enabled\\nGitHub Artifacts: Enabled\\nSonarQube: Integration / preparation completed",
+                                                         "mode":  "markdown"
+                                                     },
+                                         "pluginVersion":  "13.1.0",
+                                         "targets":  [
+
+                                                     ],
+                                         "title":  "Pipeline Status",
+                                         "type":  "text"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+                                                                                               {
+                                                                                                   "options":  {
+                                                                                                                   "0":  {
+                                                                                                                             "color":  "red",
+                                                                                                                             "text":  "FAILED"
+                                                                                                                         },
+                                                                                                                   "1":  {
+                                                                                                                             "color":  "green",
+                                                                                                                             "text":  "PASSED"
+                                                                                                                         }
+                                                                                                               },
+                                                                                                   "type":  "value"
+                                                                                               }
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  1
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  4,
+                                                         "x":  0,
+                                                         "y":  28
+                                                     },
+                                         "id":  101,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "sonarcloud_quality_gate_status",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "SonarCloud Quality Gate",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  3
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  6
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  4,
+                                                         "x":  4,
+                                                         "y":  28
+                                                     },
+                                         "id":  102,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "sonarcloud_bugs_total",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "SonarCloud Bugs",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  10
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  20
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  4,
+                                                         "x":  8,
+                                                         "y":  28
+                                                     },
+                                         "id":  103,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "sonarcloud_vulnerabilities_total",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "SonarCloud Vulnerabilities",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  10
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  20
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  50
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  4,
+                                                         "x":  12,
+                                                         "y":  28
+                                                     },
+                                         "id":  104,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "sonarcloud_code_smells_total",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "SonarCloud Code Smells",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  5
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  10
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  4,
+                                                         "x":  16,
+                                                         "y":  28
+                                                     },
+                                         "id":  105,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "sonarcloud_security_hotspots_total",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "SonarCloud Security Hotspots",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+                                                                                               {
+                                                                                                   "options":  {
+                                                                                                                   "1":  {
+                                                                                                                             "color":  "green",
+                                                                                                                             "text":  "A"
+                                                                                                                         },
+                                                                                                                   "2":  {
+                                                                                                                             "color":  "yellow",
+                                                                                                                             "text":  "B"
+                                                                                                                         },
+                                                                                                                   "3":  {
+                                                                                                                             "color":  "orange",
+                                                                                                                             "text":  "C"
+                                                                                                                         },
+                                                                                                                   "4":  {
+                                                                                                                             "color":  "red",
+                                                                                                                             "text":  "D"
+                                                                                                                         },
+                                                                                                                   "5":  {
+                                                                                                                             "color":  "red",
+                                                                                                                             "text":  "E"
+                                                                                                                         }
+                                                                                                               },
+                                                                                                   "type":  "value"
+                                                                                               }
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  2
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  3
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  4
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  2,
+                                                         "x":  20,
+                                                         "y":  28
+                                                     },
+                                         "id":  106,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "sonarcloud_security_rating",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "SonarCloud Security Rating",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+                                                                                               {
+                                                                                                   "options":  {
+                                                                                                                   "0":  {
+                                                                                                                             "color":  "red",
+                                                                                                                             "text":  "DOWN"
+                                                                                                                         },
+                                                                                                                   "1":  {
+                                                                                                                             "color":  "green",
+                                                                                                                             "text":  "UP"
+                                                                                                                         }
+                                                                                                               },
+                                                                                                   "type":  "value"
+                                                                                               }
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  1
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  2,
+                                                         "x":  22,
+                                                         "y":  28
+                                                     },
+                                         "id":  107,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "sonarcloud_api_up",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "SonarCloud API",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+                                                                                               {
+                                                                                                   "options":  {
+                                                                                                                   "0":  {
+                                                                                                                             "color":  "red",
+                                                                                                                             "text":  "FAILED"
+                                                                                                                         },
+                                                                                                                   "1":  {
+                                                                                                                             "color":  "green",
+                                                                                                                             "text":  "PASSED"
+                                                                                                                         }
+                                                                                                               },
+                                                                                                   "type":  "value"
+                                                                                               }
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  1
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  6,
+                                                         "x":  0,
+                                                         "y":  34
+                                                     },
+                                         "id":  201,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "gitleaks_scan_status",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "GitLeaks Secret Scan",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "orange",
+                                                                                                                   "value":  3
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  5
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  6,
+                                                         "x":  6,
+                                                         "y":  34
+                                                     },
+                                         "id":  202,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "gitleaks_secrets_detected_total",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "GitLeaks Secrets Detected",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+                                                                                               {
+                                                                                                   "options":  {
+                                                                                                                   "0":  {
+                                                                                                                             "color":  "red",
+                                                                                                                             "text":  "FAILED"
+                                                                                                                         },
+                                                                                                                   "1":  {
+                                                                                                                             "color":  "green",
+                                                                                                                             "text":  "SUCCESS"
+                                                                                                                         },
+                                                                                                                   "2":  {
+                                                                                                                             "color":  "yellow",
+                                                                                                                             "text":  "RUNNING / UNKNOWN"
+                                                                                                                         }
+                                                                                                               },
+                                                                                                   "type":  "value"
+                                                                                               }
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "red",
+                                                                                                                   "value":  null
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "green",
+                                                                                                                   "value":  1
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "color":  "yellow",
+                                                                                                                   "value":  2
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  4,
+                                                         "x":  12,
+                                                         "y":  34
+                                                     },
+                                         "id":  301,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "github_actions_pipeline_status",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "GitHub Actions Pipeline",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "blue",
+                                                                                                                   "value":  null
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "s"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  4,
+                                                         "x":  16,
+                                                         "y":  34
+                                                     },
+                                         "id":  302,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "github_actions_run_duration_seconds",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Latest Pipeline Duration",
+                                         "type":  "stat"
+                                     },
+                                     {
+                                         "datasource":  {
+                                                            "type":  "prometheus",
+                                                            "uid":  "prometheus"
+                                                        },
+                                         "fieldConfig":  {
+                                                             "defaults":  {
+                                                                              "color":  {
+                                                                                            "mode":  "thresholds"
+                                                                                        },
+                                                                              "mappings":  [
+
+                                                                                           ],
+                                                                              "thresholds":  {
+                                                                                                 "mode":  "absolute",
+                                                                                                 "steps":  [
+                                                                                                               {
+                                                                                                                   "color":  "blue",
+                                                                                                                   "value":  null
+                                                                                                               }
+                                                                                                           ]
+                                                                                             },
+                                                                              "unit":  "short"
+                                                                          },
+                                                             "overrides":  [
+
+                                                                           ]
+                                                         },
+                                         "gridPos":  {
+                                                         "h":  5,
+                                                         "w":  4,
+                                                         "x":  20,
+                                                         "y":  34
+                                                     },
+                                         "id":  303,
+                                         "options":  {
+                                                         "colorMode":  "background",
+                                                         "graphMode":  "none",
+                                                         "justifyMode":  "center",
+                                                         "orientation":  "auto",
+                                                         "reduceOptions":  {
+                                                                               "calcs":  [
+                                                                                             "lastNotNull"
+                                                                                         ],
+                                                                               "fields":  "",
+                                                                               "values":  false
+                                                                           },
+                                                         "textMode":  "auto",
+                                                         "wideLayout":  true
+                                                     },
+                                         "targets":  [
+                                                         {
+                                                             "datasource":  {
+                                                                                "type":  "prometheus",
+                                                                                "uid":  "prometheus"
+                                                                            },
+                                                             "expr":  "github_actions_total_runs",
+                                                             "refId":  "A"
+                                                         }
+                                                     ],
+                                         "title":  "Total Pipeline Runs",
+                                         "type":  "stat"
+                                     }
+                                 ],
+                      "preload":  false,
+                      "refresh":  "10s",
+                      "schemaVersion":  42,
+                      "tags":  [
+                                   "devsecops",
+                                   "trivy",
+                                   "prometheus",
+                                   "capstone"
+                               ],
+                      "time":  {
+                                   "from":  "now-1h",
+                                   "to":  "now"
+                               },
+                      "timepicker":  {
+                                         "refresh_intervals":  [
+                                                                   "5s",
+                                                                   "10s",
+                                                                   "30s",
+                                                                   "1m",
+                                                                   "5m",
+                                                                   "15m",
+                                                                   "30m",
+                                                                   "1h",
+                                                                   "2h",
+                                                                   "1d"
+                                                               ]
+                                     },
+                      "timezone":  "browser",
+                      "title":  "ScanGuard AI - DevSecOps Security Dashboard",
+                      "uid":  "scanguard-ai-devsecops",
+                      "version":  19
+                  }
+}

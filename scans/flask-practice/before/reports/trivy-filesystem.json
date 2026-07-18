@@ -1,0 +1,19 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.72.0"
+  },
+  "ReportID": "019f6a44-51fe-78f4-9ac5-bb6ba49c2983",
+  "CreatedAt": "2026-07-16T09:31:30.174593216Z",
+  "ArtifactID": "sha256:026421cd02c368ada4cfdcad73a3ee2b78d784d7928ea59e0b37820d0b54ce16",
+  "ArtifactName": "/workspace",
+  "ArtifactType": "repository",
+  "Metadata": {
+    "RepoURL": "https://github.com/fancy1505/flask_Practice.git",
+    "Branch": "security-before",
+    "Commit": "89de05c9c24eea1c71a3623e3d2ac89a3e8b5639",
+    "CommitMsg": "Add CI/CD pipeline for Flask application",
+    "Author": "mrs f.Kejriwal \u003cms.fkejriwal@outlook.com\u003e",
+    "Committer": "GitHub \u003cnoreply@github.com\u003e"
+  }
+}
