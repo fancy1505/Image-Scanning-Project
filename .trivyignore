@@ -1,0 +1,21 @@
+# ===================================================
+# ScanGuard AI - Trivy Ignore List
+#
+# Ignore vulnerabilities only after review and
+# documented temporary risk acceptance.
+#
+# Review Date: 2026-07-19
+# Review Owner: ScanGuard AI Security Team
+# ===================================================
+
+# Temporary exception:
+# Severity: LOW
+# Package: busybox, busybox-binsh, ssl_client
+# Installed version: 1.37.0-r12
+# Fixed version: 1.37.0-r14
+# Reason: Temporary capstone demonstration of
+# vulnerability exception handling.
+# Action: Upgrade the Alpine base image.
+# Expiry: 2026-08-19
+
+CVE-2025-46394

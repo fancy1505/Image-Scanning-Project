@@ -27,7 +27,8 @@ jobs:
           scan-ref: shopNow
           format: json
           output: trivy-fs-report.json
-          severity: HIGH,CRITICAL
+          severity: LOW,MEDIUM,HIGH,CRITICAL
+          ignorefile: .trivyignore
           exit-code: 0
 
       - name: Build Backend Image
