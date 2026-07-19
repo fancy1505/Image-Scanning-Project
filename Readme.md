@@ -1,400 +1,300 @@
-# Sprint 2 – Security Pipeline Integration using GitHub Actions
+# Container Image Vulnerability Scanner with Reporting
 
 ## Project Overview
 
-The objective of Sprint 2 was to integrate automated security testing into the CI/CD pipeline using GitHub Actions. The implementation follows DevSecOps principles by embedding security controls directly into the software delivery lifecycle.
+Containerized applications are widely used in modern DevOps environments. However, vulnerable container images can introduce security risks into production systems.
 
-The security pipeline automatically performs:
+This project implements an automated **Container Image Vulnerability Scanner** using **Trivy** to scan Docker images, detect known vulnerabilities from CVE databases, and generate detailed reports.
 
-* Secret scanning using Gitleaks
-* Static code analysis preparation using SonarQube
-* Filesystem vulnerability scanning using Trivy
-* Docker image security scanning
-* Security report generation
-* Artifact storage for auditing and compliance
+The project uses the **ShopNow E-Commerce Application** as the target application for vulnerability assessment.
 
-This automation helps identify vulnerabilities and exposed secrets early in the development process before deployment.
+---
 
-# Architecture
+## Sprint 1 Goal
+
+The objective of Sprint 1 was to establish the foundation of the vulnerability scanning solution by:
+
+* Setting up the project repository structure
+* Installing and configuring Trivy
+* Building Docker images for the ShopNow application
+* Performing single-image and multi-image vulnerability scans
+* Generating JSON and HTML vulnerability reports
+* Exploring CVE-based vulnerability detection
+* 
+<img width="947" height="529" alt="image" src="https://github.com/user-attachments/assets/b081fece-2e14-44c2-972a-3bd0478f609b" />
+<img width="1773" height="719" alt="image" src="https://github.com/user-attachments/assets/2167e7d3-66b4-49bb-906f-dfda2b751e42" />
+<img width="885" height="1153" alt="image" src="https://github.com/user-attachments/assets/63da1405-0d27-4e25-919c-89e6c3a2a87d" />
+<img width="889" height="1126" alt="image" src="https://github.com/user-attachments/assets/9852e9a1-bdfa-4161-8937-1d58a1876219" />
+<img width="900" height="393" alt="image" src="https://github.com/user-attachments/assets/d42e6b6c-a768-4e00-af7d-ba276712ba8c" />
+# Multi-Image Scan Execution
+<img width="933" height="398" alt="image" src="https://github.com/user-attachments/assets/4545616a-2d95-41ad-9a6e-02b6e1d3542b" />
+<img width="1089" height="620" alt="image" src="https://github.com/user-attachments/assets/cbab891c-2eb9-410a-b7e7-bf473b9924e6" />
+
+
+# JSON Reports Generated
+<img width="963" height="460" alt="image" src="https://github.com/user-attachments/assets/84426abf-3f03-44ac-ab29-3d5ebf50538e" />
+<img width="1010" height="819" alt="image" src="https://github.com/user-attachments/assets/b864cc28-5a2a-4658-ae42-33b5210bd35e" />
+<img width="1017" height="878" alt="image" src="https://github.com/user-attachments/assets/9165c1ba-8c67-416c-b449-21cf12a01259" />
+
+# Single-Image Scan Execution
+<img width="1083" height="512" alt="image" src="https://github.com/user-attachments/assets/2febaeef-cd35-47e9-95c0-b01f57309a3e" />
+<img width="878" height="450" alt="image" src="https://github.com/user-attachments/assets/6fe11f5d-2541-41e9-bab4-37c9a7b61f74" />
+
+
+
+
+
+
+
+---
+
+## Technologies Used
+
+| Tool         | Purpose                  |
+| ------------ | ------------------------ |
+| Docker       | Container image creation |
+| Trivy        | Vulnerability scanning   |
+| Python       | Scan automation scripts  |
+| CVE Database | Vulnerability detection  |
+| GitHub       | Source code management   |
+
+---
+
+# Project Structure
 
 ```text
-Developer Push
-      │
-      ▼
-GitHub Actions
-      │
-      ▼
-Checkout Repository
-      │
-      ▼
-Gitleaks Secret Scan
-      │
-      ▼
-Trivy Filesystem Scan
-      │
-      ▼
-Docker Image Build
-      │
-      ▼
-Container Vulnerability Scan
-      │
-      ▼
-Generate Reports
-      │
-      ▼
-Upload Security Artifacts
+Container-Vulnerability-Scanner
+│
+├── docs
+│   └── Sprint1_Report.md
+│
+├── images
+│
+├── reports
+│   ├── shopnow-admin_v1.json
+│   ├── shopnow-backend_v1.json
+│   ├── shopnow-frontend_v1.json
+│   └── shopnow-backend.html
+│
+├── scripts
+│   ├── scan.py
+│   ├── scan_single.py
+│   ├── severity_scan.py
+│   └── generate_html.py
+│
+├── shopNow
+│
+├── html.tpl
+└── README.md
+```
+
+### Project Structure Screenshot
+
+```markdown
+![Project Structure](images/project-structure.png)
 ```
 
 ---
 
-# Technologies Used
+# ShopNow Application
 
-| Tool             | Purpose                   |
-| ---------------- | ------------------------- |
-| GitHub Actions   | CI/CD workflow automation |
-| Docker           | Containerization platform |
-| Trivy            | Vulnerability scanning    |
-| Gitleaks         | Secret detection          |
-| SonarQube        | Static code analysis      |
-| GitHub Artifacts | Security report storage   |
+The ShopNow E-Commerce Application was selected as the target application for vulnerability scanning.
 
----
-
-# Tool Description and Purpose
-
-## GitHub Actions
-
-GitHub Actions is used to automate the execution of security checks whenever code is pushed or a pull request is created.
-
-Responsibilities:
-
-* Execute security workflow
-* Build Docker images
-* Run vulnerability scans
-* Upload security reports
-
----
-
-## Gitleaks
-
-Gitleaks detects sensitive information accidentally committed to source code repositories.
-
-Security Checks:
-
-* API Keys
-* Passwords
-* Tokens
-* Secrets
-* Credentials
-
-Purpose:
-
-Prevent credential leakage and improve repository security.
-
----
-
-## Trivy
-
-Trivy is an open-source vulnerability scanner used for filesystem and container security scanning.
-
-Security Checks:
-
-* Vulnerable packages
-* Dependency CVEs
-* Operating system vulnerabilities
-* Container image vulnerabilities
-
-Purpose:
-
-Identify HIGH and CRITICAL vulnerabilities before deployment.
-
----
-
-## Docker
-
-Docker packages applications into containers that can be scanned and deployed consistently.
-
-Images Built:
-
-* shopnow-backend:v1
-* shopnow-frontend:v1
-* shopnow-admin:v1
-
-Purpose:
-
-Provide isolated environments and enable container security scanning.
-
----
-
-## SonarQube
-
-SonarQube provides static code analysis and code quality assessment.
-
-Analysis Areas:
-
-* Bugs
-* Code Smells
-* Vulnerabilities
-* Security Hotspots
-* Maintainability Issues
-
-Purpose:
-
-Improve code quality and identify security weaknesses.
-
----
-
-## GitHub Artifacts
-
-GitHub Artifacts store generated reports from workflow executions.
-
-Artifacts Generated:
-
-* gitleaks-results.sarif
-* security-reports
-
-Purpose:
-
-Support auditing and historical security tracking.
-
----
-
-# Repository Structure
-Description:
-Screenshot showing the Container-Vulnerability-Scanner repository structure in VS Code.
-<img width="711" height="1246" alt="image" src="https://github.com/user-attachments/assets/f1a22476-dcd6-4304-b09a-dbdfa4d8058b" />
-<img width="1732" height="1026" alt="image" src="https://github.com/user-attachments/assets/1b5e8d94-fa57-4328-8227-46e0aeb953cf" />
-
-
----
-
-# Security Pipeline Workflow
-
-Workflow File:
-
-```yaml
-.github/workflows/security-pipeline.yml
-```
-Description:
-GitHub Actions workflow implementing automated security scanning.
-<img width="1206" height="1500" alt="image" src="https://github.com/user-attachments/assets/5faf0c1d-2373-4983-ba7c-c2c52877529e" />
-<img width="1464" height="1257" alt="image" src="https://github.com/user-attachments/assets/f48e2a5c-f050-4e20-9547-f8fadffd2314" />
-<img width="1059" height="956" alt="image" src="https://github.com/user-attachments/assets/44affefa-18ed-480b-889e-b54ee2c74deb" />
-<img width="1109" height="1048" alt="image" src="https://github.com/user-attachments/assets/ade5c0a5-b00d-4d6d-aefa-82ac5e72b574" />
-
----
-
-# Secret Scanning using Gitleaks
-
-Purpose:
-
-* Detect hardcoded passwords
-* Detect API keys
-* Detect exposed tokens
-* Prevent credential leakage
-
-Workflow Step:
-
-```yaml
-- name: Run Gitleaks
-  uses: gitleaks/gitleaks-action@v2
-```
-
-Result:
-
-No secrets were detected.
-
-<img width="2479" height="1525" alt="image" src="https://github.com/user-attachments/assets/301ccb47-19ce-438e-b22c-c8ac9e5b7c33" />
-<img width="2677" height="1557" alt="image" src="https://github.com/user-attachments/assets/9a52aaca-34c8-4fbd-979c-d79a3c604450" />
-
-
-## Static Code Analysis with SonarQube
-
-Purpose:
-- Analyze source code quality
-- Detect bugs and code smells
-- Identify security vulnerabilities and hotspots
-- Enforce quality gates before deployment
-
-Project Key:
-shopnow-security
-
-Tools Used:
-- SonarQube Community Edition
-- SonarScanner
-- Java 17
-
-<img width="2875" height="1453" alt="image" src="https://github.com/user-attachments/assets/fd4c5c9c-c98f-4307-ae57-a9e08bf29de8" />
-<img width="2877" height="1476" alt="image" src="https://github.com/user-attachments/assets/a1373c1c-f889-49e6-bd45-38f8bbe7f2c3" />
-
-
-
-[PASTE SCREENSHOT 4 – SONARQUBE ANALYSIS RESULTS HERE]
-
----
-
-# Filesystem Vulnerability Scan using Trivy
-
-Purpose:
-
-* Scan project dependencies
-* Identify vulnerable packages
-* Detect HIGH and CRITICAL CVEs
-
-Command:
-
-```bash
-trivy fs shopNow --severity HIGH,CRITICAL
-```
-
-<img width="2400" height="1037" alt="image" src="https://github.com/user-attachments/assets/19123ac0-f0f8-4e62-9009-563cbcf39b63" />
-<img width="2394" height="600" alt="image" src="https://github.com/user-attachments/assets/42d1ea4b-03f2-4133-9119-515a0fb63758" />
-<img width="2810" height="1410" alt="image" src="https://github.com/user-attachments/assets/f848faff-f943-4e61-afae-7640fd266931" />
-<img width="2166" height="949" alt="image" src="https://github.com/user-attachments/assets/099d94e0-0e7d-443e-a475-6efc168c0cd3" />
-
----
-
-# Vulnerability Scan Results
-
-Summary:
-
-| Component | Vulnerabilities |
-| --------- | --------------- |
-| Admin     | 35              |
-| Backend   | 2               |
-| Frontend  | 35              |
-
-Generated Report:
+Docker images built:
 
 ```text
-reports/trivy-fs-report.json
-```
-<img width="1766" height="1543" alt="image" src="https://github.com/user-attachments/assets/6e0f908b-4453-4315-8cbc-1223d8bb2bfd" />
-<img width="1143" height="1298" alt="image" src="https://github.com/user-attachments/assets/968f1dd4-fdd6-44e1-996f-b4e72ada0941" />
-<img width="1134" height="1300" alt="image" src="https://github.com/user-attachments/assets/188ca37e-4cec-4cc9-ba22-39e301fc2547" />
-<img width="1120" height="1399" alt="image" src="https://github.com/user-attachments/assets/f4e1390d-adba-4e99-841b-8c8958213bf1" />
-<img width="1905" height="1523" alt="image" src="https://github.com/user-attachments/assets/914e5316-1e96-4ee7-9591-19120f48f33d" />
-
----
-
-# Docker Image Security Scanning
-
-Docker Images Built:
-
-* shopnow-backend:v1
-* shopnow-frontend:v1
-* shopnow-admin:v1
-
-Purpose:
-
-* Scan container images
-* Identify vulnerable libraries
-* Generate JSON security reports
-
-Reports Generated:
-
-* backend-report.json
-* frontend-report.json
-* admin-report.json
-
-<img width="549" height="567" alt="image" src="https://github.com/user-attachments/assets/252ccc2d-4103-457f-9f03-6d2d9167533c" />
-<img width="2387" height="1525" alt="image" src="https://github.com/user-attachments/assets/867fdc2d-76f5-4bb1-b692-04bf327290c1" />
-
-
----
-
-# GitHub Actions Pipeline Execution
-
-The Security Pipeline was automatically triggered on:
-
-```yaml
-on:
-  push:
-  pull_request:
+shopnow-admin:v1
+shopnow-backend:v1
+shopnow-frontend:v1
 ```
 
-Completed Stages:
+### Docker Images Screenshot
 
-* Checkout Code
-* Gitleaks Scan
-* Trivy Filesystem Scan
-* Container Scan
-* Artifact Upload
-
-<img width="1660" height="1442" alt="image" src="https://github.com/user-attachments/assets/0171b23f-3e19-425f-95ce-6c2679a910e7" />
-<img width="1269" height="1449" alt="image" src="https://github.com/user-attachments/assets/e5a2bda6-3074-4447-8a35-422c7ba445b6" />
-<img width="1392" height="1494" alt="image" src="https://github.com/user-attachments/assets/e737a52b-056e-4cd8-bd29-755095ab0a8f" />
-<img width="1408" height="1012" alt="image" src="https://github.com/user-attachments/assets/7f407fd3-8c05-401a-a6e1-705240474fb8" />
-<img width="2864" height="990" alt="image" src="https://github.com/user-attachments/assets/e93df6df-7a96-4a6e-9055-10ed2b414d33" />
-<img width="2832" height="1269" alt="image" src="https://github.com/user-attachments/assets/b352888e-1371-44db-97a1-244c96996765" />
-
+```markdown
+![Docker Images](images/docker-images.png)
+```
 
 ---
 
-# Security Artifacts Generated
+# Single Image Vulnerability Scan
 
-Artifacts Produced:
+A Python script was created to scan individual Docker images using Trivy.
 
-* gitleaks-results.sarif
-* security-reports
-
-Purpose:
-
-* Store scan results
-* Download reports for auditing
-* Track security posture over time
-
-<img width="2018" height="666" alt="image" src="https://github.com/user-attachments/assets/b28fcb63-0e86-473e-9fe8-32e9173275a4" />
-
-
----
-
-# Git Operations
-
-Branch Used:
+### Command
 
 ```bash
-sprint2-security-pipeline
+python scripts/scan_single.py
 ```
 
-Push Command:
+### Example Scan
+
+```text
+Enter Docker image name: shopnow-backend:v1
+
+INFO [vuln] Vulnerability scanning is enabled
+INFO Detected OS family="alpine" version="3.21.3"
+
+Scan completed for shopnow-backend:v1
+```
+
+### Screenshot
+
+```markdown
+![Single Image Scan](images/single-image-scan.png)
+```
+
+---
+
+# Multi Image Vulnerability Scan
+
+A Python automation script was developed to scan multiple Docker images sequentially.
+
+### Command
 
 ```bash
-git push origin sprint2-security-pipeline
+python scripts/scan.py
 ```
 
-<img width="1674" height="819" alt="image" src="https://github.com/user-attachments/assets/a25ee3f3-ae39-4731-b3c4-795da78716bd" />
+### Output
 
+```text
+Scanning shopnow-backend:v1...
+Generated reports/shopnow-backend_v1.json
 
-# Challenges Faced
+Scanning shopnow-frontend:v1...
+Generated reports/shopnow-frontend_v1.json
 
-1. Java installation and configuration for SonarScanner.
-2. SonarScanner PATH configuration.
-3. GitHub Actions workflow debugging.
-4. Trivy action version compatibility issues.
-5. Docker image build path troubleshooting.
-6. GitHub artifact upload configuration.
-7. Vulnerability report generation and validation.
+Scanning shopnow-admin:v1...
+Generated reports/shopnow-admin_v1.json
 
----
+All scans completed
+```
 
-# Learning Outcomes
+### Screenshot
 
-* GitHub Actions workflow development
-* DevSecOps implementation
-* Secret detection using Gitleaks
-* Filesystem vulnerability scanning
-* Container image security scanning
-* SonarQube integration
-* Artifact management
-* CI/CD security automation
-* Security report generation
-* Vulnerability assessment and analysis
+```markdown
+![Multi Image Scan](images/multi-image-scan.png)
+```
 
 ---
 
-# Conclusion
+# CVE-Based Vulnerability Detection
 
-Sprint 2 successfully integrated automated security testing into the CI/CD pipeline using GitHub Actions. Security checks are now executed automatically whenever code changes are introduced, ensuring continuous monitoring of source code, dependencies, and container images.
+Trivy integrates with vulnerability databases and scans:
 
-The implementation demonstrates DevSecOps best practices by combining secret scanning, vulnerability assessment, static analysis preparation, automated reporting, and artifact management into a unified security pipeline. This approach improves application security, enhances code quality, and enables early detection of security issues throughout the software development lifecycle.
+* Operating System packages
+* Application dependencies
+* Language-specific packages
+* Known CVEs
+
+During scanning, Trivy detected:
+
+* Alpine Linux vulnerabilities
+* Package vulnerabilities
+* Dependency vulnerabilities
+
+Example:
+
+```text
+Detected OS family="alpine"
+Detecting vulnerabilities...
+```
+
+---
+
+# Generated JSON Reports
+
+The scanner generates machine-readable JSON reports for further analysis.
+
+Generated reports:
+
+```text
+shopnow-admin_v1.json
+shopnow-backend_v1.json
+shopnow-frontend_v1.json
+```
+
+### Screenshot
+
+```markdown
+![Generated Reports](images/generated-reports.png)
+```
+
+---
+
+# HTML Vulnerability Report
+
+An HTML report was generated for easier visualization of vulnerabilities.
+
+### Features
+
+* Vulnerability summary
+* Severity classification
+* CVE IDs
+* Package details
+* Fix recommendations
+
+### Screenshot
+
+```markdown
+![HTML Report](images/html-report.png)
+```
+
+---
+
+# Sprint 1 Achievements
+
+### Completed Tasks
+
+* Repository setup completed
+* Folder structure created
+* Trivy installed and configured
+* ShopNow Docker images built
+* Single image scanning implemented
+* Multi-image scanning implemented
+* CVE-based vulnerability detection verified
+* JSON reports generated
+* HTML report generated
+* Sprint 1 documentation completed
+
+---
+
+# Results
+
+Successfully scanned the following ShopNow images:
+
+```text
+shopnow-backend:v1
+shopnow-frontend:v1
+shopnow-admin:v1
+```
+
+Generated:
+
+* JSON vulnerability reports
+* HTML vulnerability report
+* CVE-based vulnerability analysis
+
+The Sprint 1 objective of establishing a functional container vulnerability scanning framework was successfully achieved.
+
+---
+
+# Future Enhancements (Sprint 2)
+
+* GitHub Actions integration
+* CI/CD pipeline scanning
+* Build failure on HIGH/CRITICAL vulnerabilities
+* Configurable severity thresholds
+* Automated scanning on every code push
+
+---
+
+# Author
+
+**Fancy Kejriwal**
+
+Container Image Vulnerability Scanner with Reporting – Sprint 1 Submission
+
+---
+
+After creating the screenshots, place them in the `images/` folder and this README will render nicely on GitHub.
