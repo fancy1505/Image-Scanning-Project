@@ -9,91 +9,175 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Run GitLeaks Secret Scan
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-      - name: Run Trivy Filesystem Scan
-        uses: aquasecurity/trivy-action@v0.35.0
-        with:
-          scan-type: fs
-          scan-ref: shopNow
-          format: json
-          output: trivy-fs-report.json
-          severity: LOW,MEDIUM,HIGH,CRITICAL
-          trivyignores: .trivyignore
-          exit-code: 0
+    ############################################################
+    # Retry Logic Test
+    ############################################################
 
-      - name: Build Backend Image
-        run: docker build -t shopnow-backend:v1 ./shopNow/backend
+    - name: Test Retry Logic
+      shell: pwsh
+      run: |
+        ./scripts/retry-command.ps1 `
+          -Command "Write-Host 'Retry logic executed successfully'" `
+          -MaxAttempts 3 `
+          -DelaySeconds 5
 
-      - name: Build Frontend Image
-        run: docker build -t shopnow-frontend:v1 ./shopNow/frontend
+    ############################################################
+    # GitLeaks
+    ############################################################
 
-      - name: Build Admin Image
-        run: docker build -t shopnow-admin:v1 ./shopNow/admin
+    - name: Run GitLeaks Secret Scan
+      uses: gitleaks/gitleaks-action@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: true
 
-      - name: Scan Backend Image
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: shopnow-backend:v1
-          severity: HIGH,CRITICAL
-          format: json
-          output: backend-report.json
-          exit-code: 0
+    ############################################################
+    # Trivy Filesystem Scan
+    ############################################################
 
-      - name: Scan Frontend Image
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: shopnow-frontend:v1
-          severity: HIGH,CRITICAL
-          format: json
-          output: frontend-report.json
-          exit-code: 0
+    - name: Run Trivy Filesystem Scan
+      uses: aquasecurity/trivy-action@v0.35.0
+      with:
+        scan-type: fs
+        scan-ref: shopNow
+        format: json
+        output: trivy-fs-report.json
+        severity: LOW,MEDIUM,HIGH,CRITICAL
+        trivyignores: .trivyignore
+        exit-code: 0
 
-      - name: Scan Admin Image
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: shopnow-admin:v1
-          severity: HIGH,CRITICAL
-          format: json
-          output: admin-report.json
-          exit-code: 0
+    ############################################################
+    # Build Docker Images (with Retry Logic)
+    ############################################################
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+    - name: Build Backend Image
+      shell: pwsh
+      run: |
+        ./scripts/retry-command.ps1 `
+          -Command "docker build -t shopnow-backend:v1 ./shopNow/backend"
 
-      - name: Install Dependencies
-        run: |
-          pip install requests
+    - name: Build Frontend Image
+      shell: pwsh
+      run: |
+        ./scripts/retry-command.ps1 `
+          -Command "docker build -t shopnow-frontend:v1 ./shopNow/frontend"
 
-      - name: Generate Reports
-        run: |
-          python scripts/report_generator.py
+    - name: Build Admin Image
+      shell: pwsh
+      run: |
+        ./scripts/retry-command.ps1 `
+          -Command "docker build -t shopnow-admin:v1 ./shopNow/admin"
 
-      - name: Send Slack Notification
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: |
-          python scripts/slack_notify.py
+    ############################################################
+    # Backend Scan
+    ############################################################
 
-      - name: Upload Security Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: security-reports
-          path: |
-            backend-report.json
-            frontend-report.json
-            admin-report.json
-            trivy-fs-report.json
-            reports/summary-report.json
-            reports/consolidated-report.html
+    - name: Scan Backend Image
+      uses: aquasecurity/trivy-action@v0.35.0
+      with:
+        image-ref: shopnow-backend:v1
+        severity: HIGH,CRITICAL
+        format: json
+        output: backend-report.json
+        trivyignores: .trivyignore
+        exit-code: 0
+
+    ############################################################
+    # Frontend Scan
+    ############################################################
+
+    - name: Scan Frontend Image
+      uses: aquasecurity/trivy-action@v0.35.0
+      with:
+        image-ref: shopnow-frontend:v1
+        severity: HIGH,CRITICAL
+        format: json
+        output: frontend-report.json
+        trivyignores: .trivyignore
+        exit-code: 0
+
+    ############################################################
+    # Admin Scan
+    ############################################################
+
+    - name: Scan Admin Image
+      uses: aquasecurity/trivy-action@v0.35.0
+      with:
+        image-ref: shopnow-admin:v1
+        severity: HIGH,CRITICAL
+        format: json
+        output: admin-report.json
+        trivyignores: .trivyignore
+        exit-code: 0
+
+    ############################################################
+    # Python
+    ############################################################
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    ############################################################
+    # Generate Reports
+    ############################################################
+
+    - name: Generate Reports
+      run: |
+        python scripts/report_generator.py
+
+    ############################################################
+    - name: Run ScanGuard AI Security Analyzer
+      run: |
+          python scripts/ai_security_analyzer.py
+    ############################################################
+    # Slack Notification
+    ############################################################
+
+    - name: Send Slack Notification
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+        python scripts/slack_notify.py
+
+    ############################################################
+    # Email Notification
+    ############################################################
+
+    - name: Send Email Notification
+      env:
+        SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+        SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+        SECURITY_ALERT_EMAIL: ${{ secrets.SECURITY_ALERT_EMAIL }}
+        PIPELINE_STATUS: success
+      run: |
+        python scripts/send_security_email.py
+
+    ############################################################
+    # Upload Reports
+    ############################################################
+
+    - name: Upload Security Reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: security-reports
+        path: |
+          backend-report.json
+          frontend-report.json
+          admin-report.json
+          trivy-fs-report.json
+          reports/summary-report.json
+          reports/consolidated-report.html
+          reports/ai-analysis.json
