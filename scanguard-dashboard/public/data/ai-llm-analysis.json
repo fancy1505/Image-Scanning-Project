@@ -1,0 +1,184 @@
+{
+  "analysis_version": "3.0.0",
+  "provider": "deterministic-fallback",
+  "model": null,
+  "generated_at": "2026-07-19T08:20:02.454394+00:00",
+  "llm_enabled": false,
+  "llm_error": "ANTHROPIC_API_KEY is not configured.",
+  "deterministic_security_score": 0,
+  "deterministic_risk_level": "CRITICAL",
+  "deterministic_release_readiness": "BLOCK RELEASE",
+  "executive_summary": "ScanGuard analyzed 4 security report(s) and identified 276 vulnerability findings: 8 Critical, 120 High, 70 Medium, and 78 Low. Critical vulnerabilities represent an immediate production risk. The calculated security score is 0/100, the overall risk level is CRITICAL, and the current release decision is BLOCK RELEASE.",
+  "release_explanation": "8 Critical vulnerability finding(s) were detected. 120 High vulnerability findings remain unresolved.",
+  "management_summary": "Critical vulnerabilities may allow attackers to compromise application services, access sensitive information, disrupt operations, or gain unauthorized control. Production deployment should remain blocked until the Critical findings are remediated.",
+  "remediation_plan": [
+    {
+      "priority": 1,
+      "severity": "CRITICAL",
+      "action": "Remediate all Critical vulnerabilities and rebuild the affected container images.",
+      "reason": "8 Critical finding(s) can represent an immediate production security risk.",
+      "affected_components": [],
+      "related_findings": []
+    },
+    {
+      "priority": 2,
+      "severity": "CRITICAL",
+      "action": "Upgrade package 'libcrypto3' to a fixed version such as 3.0.12-r5, 3.0.13-r0, 3.0.14-r0.",
+      "reason": "The package is associated with 53 vulnerability finding(s) across: admin, backend, frontend.",
+      "affected_components": [
+        "CVE-2024-13176",
+        "CVE-2024-2511",
+        "CVE-2024-4603",
+        "CVE-2024-4741",
+        "CVE-2024-5535",
+        "CVE-2024-6119",
+        "CVE-2024-9143",
+        "CVE-2025-15467",
+        "CVE-2025-15468",
+        "CVE-2025-66199"
+      ],
+      "related_findings": [
+        "CVE-2024-13176",
+        "CVE-2024-2511",
+        "CVE-2024-4603",
+        "CVE-2024-4741",
+        "CVE-2024-5535",
+        "CVE-2024-6119",
+        "CVE-2024-9143",
+        "CVE-2025-15467",
+        "CVE-2025-15468",
+        "CVE-2025-66199"
+      ]
+    },
+    {
+      "priority": 3,
+      "severity": "CRITICAL",
+      "action": "Upgrade package 'libssl3' to a fixed version such as 3.0.12-r5, 3.0.13-r0, 3.0.14-r0.",
+      "reason": "The package is associated with 53 vulnerability finding(s) across: admin, backend, frontend.",
+      "affected_components": [
+        "CVE-2024-13176",
+        "CVE-2024-2511",
+        "CVE-2024-4603",
+        "CVE-2024-4741",
+        "CVE-2024-5535",
+        "CVE-2024-6119",
+        "CVE-2024-9143",
+        "CVE-2025-15467",
+        "CVE-2025-15468",
+        "CVE-2025-66199"
+      ],
+      "related_findings": [
+        "CVE-2024-13176",
+        "CVE-2024-2511",
+        "CVE-2024-4603",
+        "CVE-2024-4741",
+        "CVE-2024-5535",
+        "CVE-2024-6119",
+        "CVE-2024-9143",
+        "CVE-2025-15467",
+        "CVE-2025-15468",
+        "CVE-2025-66199"
+      ]
+    },
+    {
+      "priority": 4,
+      "severity": "CRITICAL",
+      "action": "Upgrade package 'libexpat' to a fixed version such as 2.6.3-r0, 2.6.4-r0.",
+      "reason": "The package is associated with 8 vulnerability finding(s) across: admin, frontend.",
+      "affected_components": [
+        "CVE-2024-45490",
+        "CVE-2024-45491",
+        "CVE-2024-45492",
+        "CVE-2024-50602"
+      ],
+      "related_findings": [
+        "CVE-2024-45490",
+        "CVE-2024-45491",
+        "CVE-2024-45492",
+        "CVE-2024-50602"
+      ]
+    },
+    {
+      "priority": 5,
+      "severity": "CRITICAL",
+      "action": "Upgrade package 'shell-quote' to a fixed version such as 1.8.4.",
+      "reason": "The package is associated with 2 vulnerability finding(s) across: filesystem.",
+      "affected_components": [
+        "CVE-2026-9277"
+      ],
+      "related_findings": [
+        "CVE-2026-9277"
+      ]
+    },
+    {
+      "priority": 6,
+      "severity": "HIGH",
+      "action": "Upgrade package 'minimatch' to a fixed version such as 10.2.1, 9.0.6, 8.0.5, 7.4.7, 6.2.1, 5.1.7, 4.2.4, 3.1.3, 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.3, 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.4.",
+      "reason": "The package is associated with 21 vulnerability finding(s) across: backend, filesystem.",
+      "affected_components": [
+        "CVE-2026-26996",
+        "CVE-2026-27903",
+        "CVE-2026-27904"
+      ],
+      "related_findings": [
+        "CVE-2026-26996",
+        "CVE-2026-27903",
+        "CVE-2026-27904"
+      ]
+    },
+    {
+      "priority": 7,
+      "severity": "HIGH",
+      "action": "Upgrade package 'curl' to a fixed version such as 8.6.0-r0, 8.7.1-r0, 8.9.0-r0.",
+      "reason": "The package is associated with 14 vulnerability finding(s) across: admin, frontend.",
+      "affected_components": [
+        "CVE-2024-0853",
+        "CVE-2024-2004",
+        "CVE-2024-2379",
+        "CVE-2024-2398",
+        "CVE-2024-2466",
+        "CVE-2024-6197",
+        "CVE-2024-6874"
+      ],
+      "related_findings": [
+        "CVE-2024-0853",
+        "CVE-2024-2004",
+        "CVE-2024-2379",
+        "CVE-2024-2398",
+        "CVE-2024-2466",
+        "CVE-2024-6197",
+        "CVE-2024-6874"
+      ]
+    },
+    {
+      "priority": 8,
+      "severity": "HIGH",
+      "action": "Upgrade package 'libcurl' to a fixed version such as 8.6.0-r0, 8.7.1-r0, 8.9.0-r0.",
+      "reason": "The package is associated with 14 vulnerability finding(s) across: admin, frontend.",
+      "affected_components": [
+        "CVE-2024-0853",
+        "CVE-2024-2004",
+        "CVE-2024-2379",
+        "CVE-2024-2398",
+        "CVE-2024-2466",
+        "CVE-2024-6197",
+        "CVE-2024-6874"
+      ],
+      "related_findings": [
+        "CVE-2024-0853",
+        "CVE-2024-2004",
+        "CVE-2024-2379",
+        "CVE-2024-2398",
+        "CVE-2024-2466",
+        "CVE-2024-6197",
+        "CVE-2024-6874"
+      ]
+    }
+  ],
+  "positive_observations": [
+    "The deterministic security engine completed successfully."
+  ],
+  "questions_for_security_review": [
+    "Review unresolved findings and confirm formal risk acceptance."
+  ]
+}
