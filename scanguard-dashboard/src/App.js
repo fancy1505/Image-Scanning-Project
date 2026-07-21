@@ -561,12 +561,23 @@ function App() {
     analysis.business_impact ||
     "No business-impact assessment is available.";
 
-  const recommendations =
-    llmAnalysis?.recommendations ||
-    analysis.recommendations ||
-    [];
+ const rawRecommendations =
+  llmAnalysis?.recommendations ??
+  analysis.recommendations ??
+  [];
 
-  const releaseReasons = analysis.release_reasons || [];
+const recommendations = Array.isArray(rawRecommendations)
+  ? rawRecommendations
+  : rawRecommendations &&
+      typeof rawRecommendations === "object"
+    ? Object.values(rawRecommendations)
+    : [rawRecommendations].filter(Boolean);
+
+  const rawReleaseReasons = analysis.release_reasons ?? [];
+
+const releaseReasons = Array.isArray(rawReleaseReasons)
+  ? rawReleaseReasons
+  : [rawReleaseReasons].filter(Boolean);
 
   return (
     <div className="dashboard">
