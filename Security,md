@@ -1,0 +1,284 @@
+# Security Guide
+
+## ScanGuard AI – DevSecOps Security Command Center
+
+---
+
+# 1. Overview
+
+Security is the foundation of the ScanGuard AI platform. The project adopts a **DevSecOps** approach by integrating automated security checks into the software delivery pipeline. Instead of identifying vulnerabilities after deployment, security validation occurs continuously during development and build processes.
+
+The platform combines static code analysis, secret detection, container vulnerability scanning, pipeline automation, and monitoring to improve software quality and reduce deployment risks.
+
+---
+
+# 2. Security Objectives
+
+The primary security objectives of this project are:
+
+- Detect vulnerabilities early in the development lifecycle
+- Prevent accidental exposure of secrets
+- Identify vulnerable operating system and application packages
+- Improve source code quality
+- Automate security validation
+- Provide centralized visibility through dashboards
+- Support informed deployment decisions
+
+---
+
+# 3. Security Architecture
+
+```
+                    Developer
+                        │
+                        ▼
+                 GitHub Repository
+                        │
+                        ▼
+                GitHub Actions Pipeline
+                        │
+      ┌─────────────────┼─────────────────┐
+      │                 │                 │
+      ▼                 ▼                 ▼
+ GitLeaks          SonarCloud         Docker Build
+      │                                   │
+      └──────────────┬────────────────────┘
+                     ▼
+                Trivy Security Scan
+                     │
+                     ▼
+              Security Reports (JSON)
+                     │
+                     ▼
+           Prometheus Metrics Exporter
+                     │
+                     ▼
+                Grafana Dashboard
+```
+
+---
+
+# 4. Security Tools
+
+| Tool | Purpose |
+|------|---------|
+| GitHub Actions | CI/CD workflow automation |
+| GitLeaks | Secret detection |
+| SonarCloud | Static Application Security Testing (SAST) and code quality |
+| Trivy | Filesystem and container image vulnerability scanning |
+| Docker | Containerized application packaging |
+| Prometheus | Security metrics collection |
+| Grafana | Security dashboard visualization |
+
+---
+
+# 5. Security Controls
+
+## Secret Detection
+
+GitLeaks scans the repository for exposed credentials, including:
+
+- API Keys
+- Access Tokens
+- Passwords
+- Private Keys
+- AWS Credentials
+- GitHub Tokens
+
+This prevents sensitive information from being committed to source control.
+
+---
+
+## Static Code Analysis
+
+SonarCloud analyzes the application source code to identify:
+
+- Bugs
+- Security vulnerabilities
+- Code smells
+- Reliability issues
+- Maintainability concerns
+- Quality Gate compliance
+
+Static analysis helps developers resolve issues before deployment.
+
+---
+
+## Filesystem Vulnerability Scanning
+
+Trivy scans the application source directory before containerization.
+
+The scan identifies:
+
+- Vulnerable dependencies
+- Operating system packages
+- Language packages
+- Known CVEs
+
+---
+
+## Container Image Scanning
+
+After Docker images are built, Trivy performs image scanning to identify vulnerabilities contained within the final deployment artifact.
+
+Security findings include:
+
+- Critical vulnerabilities
+- High vulnerabilities
+- Medium vulnerabilities
+- Low vulnerabilities
+
+---
+
+# 6. Secure Development Lifecycle
+
+The project follows a Shift Left Security approach.
+
+```
+Developer
+    │
+    ▼
+Source Code
+    │
+    ▼
+GitHub Push
+    │
+    ▼
+GitHub Actions
+    │
+    ▼
+Security Validation
+    │
+ ┌──┼───────────────┐
+ │  │               │
+ ▼  ▼               ▼
+GitLeaks      SonarCloud     Trivy
+ │  │               │
+ └──┴───────────────┘
+        │
+        ▼
+Security Reports
+        │
+        ▼
+Dashboard & Monitoring
+```
+
+---
+
+# 7. Security Metrics
+
+The dashboard provides visibility into the following security metrics:
+
+- Security Score
+- Total Vulnerabilities
+- Critical Findings
+- High Findings
+- Medium Findings
+- Low Findings
+- Quality Gate Status
+- Pipeline Status
+- Secret Detection Status
+- Vulnerability Trends
+
+---
+
+# 8. Current Security Findings
+
+Example metrics used within the dashboard:
+
+| Severity | Findings |
+|----------|----------|
+| Critical | 8 |
+| High | 120 |
+| Medium | 70 |
+| Low | 78 |
+
+These metrics are generated from Trivy scan reports and displayed within the React dashboard and Grafana dashboards.
+
+---
+
+# 9. Security Reports
+
+The project generates multiple security reports during pipeline execution.
+
+| Report | Format |
+|---------|--------|
+| Trivy Filesystem Report | JSON |
+| Trivy Image Report | JSON |
+| GitLeaks Report | JSON |
+| SonarCloud Analysis | Cloud Dashboard |
+| Consolidated Report | HTML |
+
+These reports provide detailed information for developers and security teams.
+
+---
+
+# 10. Security Monitoring
+
+Prometheus continuously collects security metrics generated by the Python exporter.
+
+Collected metrics include:
+
+- Critical vulnerabilities
+- High vulnerabilities
+- Medium vulnerabilities
+- Low vulnerabilities
+
+Grafana visualizes these metrics through interactive dashboards to provide near real-time visibility into the application's security posture.
+
+---
+
+# 11. Security Best Practices
+
+The following practices are incorporated into the project:
+
+- Shift Left Security
+- Automated Security Scanning
+- Continuous Integration
+- Secure Container Scanning
+- Secret Detection
+- Code Quality Analysis
+- Continuous Monitoring
+- Dashboard-Based Reporting
+- Automated Report Generation
+
+---
+
+# 12. Security Limitations
+
+The current implementation focuses on application and container security.
+
+The following capabilities are not yet implemented:
+
+- Software Bill of Materials (SBOM)
+- Infrastructure as Code (IaC) scanning
+- Dynamic Application Security Testing (DAST)
+- Kubernetes security scanning
+- Runtime threat detection
+- Automated remediation
+- Policy as Code
+
+These enhancements are planned for future versions.
+
+---
+
+# 13. Future Enhancements
+
+Planned security improvements include:
+
+- Checkov integration
+- SBOM generation
+- Dependency-Track integration
+- OWASP Dependency-Check
+- Kubernetes security scanning
+- Policy as Code
+- Security compliance reporting
+- Automated remediation recommendations
+
+---
+
+# 14. Conclusion
+
+The ScanGuard AI platform demonstrates how DevSecOps practices can be integrated into a modern CI/CD pipeline using open-source tools. By combining automated security scanning, code quality analysis, vulnerability assessment, centralized reporting, and continuous monitoring, the platform enables teams to identify and address security risks before software reaches production.
+
+The project provides a practical foundation that can be extended with additional security capabilities as future requirements evolve.
