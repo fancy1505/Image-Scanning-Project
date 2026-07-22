@@ -285,3 +285,7 @@ Image-Scanning-Project/
 
 - Multi-application support
 - Kubernetes
+-
+- Done by Junior DevOps Team (Fancy & Rahul Kumar)
+Assigned from HeroVired Virtual Education
+PPMCAD - (Batch 15)
