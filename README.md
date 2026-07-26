@@ -24,7 +24,7 @@ To:
 
 ----
 
-Done by Junior DevOps Team (Fancy, Saima & Rahul Kumar) \
+Done by Junior DevOps Team (Fancy & Rahul Kumar) \
 Assigned from HeroVired Virtual Education \
 PPMCAD - (Batch 15)
 
