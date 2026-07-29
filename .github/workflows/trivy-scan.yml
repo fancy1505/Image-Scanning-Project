@@ -18,7 +18,7 @@ jobs:
 
       # Backend Scan
       - name: Scan Backend Image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           image-ref: fancy1505/shopnow-backend:v1
           format: json
@@ -28,7 +28,7 @@ jobs:
 
       # Frontend Scan
       - name: Scan Frontend Image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           image-ref: fancy1505/shopnow-frontend:v1
           format: json
@@ -38,7 +38,7 @@ jobs:
 
       # Admin Scan
       - name: Scan Admin Image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           image-ref: fancy1505/shopnow-admin:v1
           format: json
