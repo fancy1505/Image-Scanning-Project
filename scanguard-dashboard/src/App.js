@@ -561,17 +561,20 @@ function App() {
     analysis.business_impact ||
     "No business-impact assessment is available.";
 
- const rawRecommendations =
+
+const rawRecommendations =
+  llmAnalysis?.remediation_plan ??
   llmAnalysis?.recommendations ??
+  analysis.remediation_plan ??
   analysis.recommendations ??
   [];
-
-const recommendations = Array.isArray(rawRecommendations)
+  const recommendations = Array.isArray(rawRecommendations)
   ? rawRecommendations
   : rawRecommendations &&
       typeof rawRecommendations === "object"
     ? Object.values(rawRecommendations)
     : [rawRecommendations].filter(Boolean);
+
 
   const rawReleaseReasons = analysis.release_reasons ?? [];
 
@@ -684,23 +687,43 @@ const releaseReasons = Array.isArray(rawReleaseReasons)
               <div className="recommendation-list">
                 {recommendations.map(
                   (recommendation, index) => {
-                    const recommendationText =
-                      typeof recommendation === "string"
-                        ? recommendation
-                        : recommendation.description ||
-                          recommendation.recommendation ||
-                          recommendation.title ||
-                          JSON.stringify(recommendation);
+                    const item =
+  typeof recommendation === "string"
+    ? JSON.parse(recommendation)
+    : recommendation;
 
-                    return (
-                      <div
-                        className="recommendation-item"
-                        key={`${recommendationText}-${index}`}
-                      >
-                        <span>{index + 1}</span>
-                        <p>{recommendationText}</p>
-                      </div>
-                    );
+return (
+  <div
+    className="recommendation-card"
+    key={index}
+  >
+    <div className="recommendation-header">
+      <span className={`priority-badge ${item.severity.toLowerCase()}`}>
+        {item.severity}
+      </span>
+
+      <span className="recommendation-rank">
+        Priority {item.priority}
+      </span>
+    </div>
+
+    <h4>{item.action}</h4>
+
+    <p>{item.reason}</p>
+
+    {item.related_findings?.length > 0 && (
+      <>
+        <strong>Top CVEs</strong>
+
+        <ul className="affected-list">
+          {item.related_findings.slice(0,5).map(cve=>(
+            <li key={cve}>{cve}</li>
+          ))}
+        </ul>
+      </>
+    )}
+  </div>
+);
                   }
                 )}
               </div>
