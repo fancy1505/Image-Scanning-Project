@@ -291,7 +291,7 @@ The Sprint 1 objective of establishing a functional container vulnerability scan
 
 # Author
 
-**Fancy Kejriwal**
+**Fancy Kejriwal &Rahul**
 
 Container Image Vulnerability Scanner with Reporting – Sprint 1 Submission
 
