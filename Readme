@@ -1,0 +1,870 @@
+# ScanGuard AI --- Container Image Vulnerability Scanner with DevSecOps Security Dashboard
+
+> **Project status:** Sprint 4 --- Integrated security observability
+> dashboard completed; dashboard cleanup and documentation in progress\
+> **Current demo application:** ShopNow\
+> **Next enhancements:** Multi-application support, exception
+> handling/rescanning, and Claude AI security recommendations
+
+## 1. Project Overview
+
+ScanGuard AI is a DevSecOps security monitoring and vulnerability
+reporting project designed to identify security risks before
+containerized applications are promoted toward production.
+
+The project started as a **Container Image Vulnerability Scanner with
+Reporting** and has evolved into a centralized security observability
+proof of concept combining container and filesystem vulnerability
+scanning, secret detection, static code analysis, CI/CD pipeline
+monitoring, report generation, artifact storage, Prometheus metrics, and
+Grafana visualization.
+
+The current proof of concept uses **ShopNow** as the first demo
+application. The next architecture enhancement is to make application
+onboarding configuration-driven so that the same platform can monitor
+multiple applications.
+
+## 2. Problem Statement
+
+Modern containerized applications move quickly through CI/CD pipelines,
+but security risks can enter through vulnerable packages and
+dependencies, secrets committed to source code, static code security
+issues, failed security quality gates, and inconsistent manual checks.
+
+When Trivy, GitLeaks, SonarCloud, and CI/CD results are reviewed
+separately, security visibility becomes fragmented. ScanGuard AI
+consolidates these signals into a centralized DevSecOps security
+dashboard.
+
+## 3. Project Objectives
+
+1.  Scan container images for known vulnerabilities.
+2.  Scan application filesystems before container deployment.
+3.  Detect accidentally committed secrets.
+4.  Integrate static code analysis.
+5.  Automate security checks through GitHub Actions.
+6.  Generate security reports.
+7.  Store reports as CI/CD artifacts for auditing and review.
+8.  Export security metrics in Prometheus format.
+9.  Visualize security posture in Grafana.
+10. Build a foundation for multi-application monitoring.
+11. Add AI-assisted security analysis as a future intelligence layer.
+
+## 4. Current Architecture
+
+``` text
+Application Source Code
+        |
+        v
+GitHub Repository
+        |
+        v
+GitHub Actions
+        |
+        +--> GitLeaks Secret Scan
+        +--> Trivy Filesystem Scan
+        +--> Docker Image Builds
+                    |
+                    v
+              Trivy Image Scan
+
+SonarCloud --------+
+Trivy Reports -----+
+GitLeaks ----------+--> Python Metrics Exporter
+GitHub Actions API-+    vulnerability_metrics.py
+                              |
+                       :8000/metrics
+                              |
+                              v
+                         Prometheus
+                              |
+                              v
+                           Grafana
+                              |
+                              v
+        ScanGuard AI DevSecOps Security Dashboard
+```
+
+## 5. Technology Stack
+
+  Tool                Purpose
+  ------------------- -------------------------------------------------------------
+  GitHub              Source-code repository
+  GitHub Actions      CI/CD and security workflow automation
+  Docker              Containerization and image builds
+  Trivy               Filesystem and container image vulnerability scanning
+  GitLeaks            Secret detection
+  SonarCloud          Static code analysis and security quality assessment
+  GitHub Artifacts    Security report storage for audit and review
+  Python              Report processing, API integration, and metrics aggregation
+  Prometheus          Security metrics collection
+  Grafana             Centralized DevSecOps security dashboard
+  PowerShell          Local and Grafana API automation
+  Slack integration   Security/pipeline notification preparation
+
+## 6. Repository Structure
+
+``` text
+Container-Vulnerability-Scanner/
+|
++-- .github/
+|   +-- workflows/
+|       +-- security-pipeline.yml
+|       +-- trivy-scan.yml
++-- docs/
++-- Image/
++-- images/
++-- metrics/
+|   +-- vulnerability_metrics.py
++-- monitoring/
++-- reports/
+|   +-- consolidated-report.html
+|   +-- summary-report.json
+|   +-- trivy-fs-report.json
+|   +-- shopnow-admin_v1.json
+|   +-- shopnow-backend_v1.json
+|   +-- shopnow-frontend_v1.json
+|   +-- nginx_latest.json
+|   +-- ubuntu_20.04.json
+|   +-- grafana-backups/
++-- scripts/
+|   +-- add-gitleaks-grafana-panels.ps1
+|   +-- add-sonar-grafana-panels.ps1
+|   +-- cleanup-scanguard-dashboard.ps1
+|   +-- report_generator.py
+|   +-- slack_notify.py
+|   +-- scan.py
+|   +-- scan_single.py
+|   +-- severity_scan.py
++-- shopNow/
+|   +-- admin/
+|   +-- backend/
+|   +-- frontend/
++-- docker-compose.yml
++-- sonar-project.properties
+```
+
+# Sprint Progress
+
+## Sprint 1 --- Project Foundation and Vulnerability Scanning
+
+### Goal
+
+Establish the project and validate container image vulnerability
+scanning.
+
+### Completed
+
+-   Created the project repository and folder structure.
+-   Prepared the ShopNow demo application.
+-   Configured the local DevOps/security environment.
+-   Introduced Trivy as the primary vulnerability scanner.
+-   Performed image vulnerability scans.
+-   Generated machine-readable JSON reports.
+-   Stored results in the `reports` directory.
+-   Tested multiple report/image sources including ShopNow components,
+    Nginx, and Ubuntu examples.
+
+### Example Reports
+
+``` text
+shopnow-backend_v1.json
+shopnow-frontend_v1.json
+shopnow-admin_v1.json
+nginx_latest.json
+ubuntu_20.04.json
+```
+
+### Outcome
+
+The project successfully demonstrated automated detection and JSON
+export of container image vulnerabilities.
+
+### Review Screenshots
+
+-   **Screenshot 1:** Repository structure in VS Code or PowerShell.
+-   **Screenshot 2:** `reports` directory or a successful Trivy scan
+    showing generated JSON reports.
+
+------------------------------------------------------------------------
+
+## Sprint 2 --- Security Reporting and Consolidation
+
+### Goal
+
+Transform raw scanner results into structured security reports.
+
+### Completed
+
+-   Processed Trivy JSON output with Python.
+-   Developed scan/report processing scripts.
+-   Created report-generation logic.
+-   Generated a consolidated HTML security report.
+-   Generated a JSON summary report.
+-   Organized security results under `reports`.
+-   Prepared Slack notification integration.
+-   Established a reporting layer between scanners and monitoring.
+
+### Important Files
+
+``` text
+scripts/report_generator.py
+scripts/generate_html.py
+scripts/slack_notify.py
+reports/consolidated-report.html
+reports/summary-report.json
+```
+
+### Outcome
+
+Raw vulnerability findings were converted into reusable security reports
+for review, artifact storage, and dashboard processing.
+
+### Review Screenshots
+
+-   **Screenshot 3:** `consolidated-report.html` open in a browser.
+-   **Screenshot 4:** Reports directory showing summary, HTML,
+    filesystem, and image reports.
+
+------------------------------------------------------------------------
+
+## Sprint 3 --- DevSecOps CI/CD Security Pipeline
+
+### Goal
+
+Move security scanning from a manual process into an automated CI/CD
+security workflow.
+
+### Pipeline
+
+The main workflow is:
+
+``` text
+.github/workflows/security-pipeline.yml
+```
+
+It is triggered on push and pull request events.
+
+### Current Security Pipeline Stages
+
+1.  Checkout source code.
+2.  Run GitLeaks secret scanning.
+3.  Run Trivy filesystem scanning.
+4.  Build the ShopNow backend image.
+5.  Build the ShopNow frontend image.
+6.  Build the ShopNow admin image.
+7.  Scan the backend image.
+8.  Scan the frontend image.
+9.  Scan the admin image.
+10. Set up Python.
+11. Install report dependencies.
+12. Generate reports.
+13. Run Slack notification preparation.
+14. Upload security reports as GitHub Artifacts.
+
+### GitLeaks
+
+GitLeaks is integrated into the GitHub Actions workflow to identify
+secret patterns such as API keys, tokens, and credentials.
+
+Current exported state:
+
+``` text
+GitLeaks scan status: PASS
+Secrets detected: 0
+```
+
+### Trivy Filesystem Scanning
+
+The ShopNow source filesystem is scanned before image security analysis.
+
+Current point-in-time findings:
+
+``` text
+FS Critical Vulnerabilities: 2
+FS High Vulnerabilities: 70
+```
+
+### Docker Image Scanning
+
+The pipeline builds and scans:
+
+``` text
+shopnow-backend:v1
+shopnow-frontend:v1
+shopnow-admin:v1
+```
+
+### GitHub Artifacts
+
+The workflow uploads security evidence including image scan reports,
+filesystem scan output, the summary report, and the consolidated HTML
+report.
+
+This provides report retention for audit, review, and
+compliance-oriented evidence.
+
+### Outcome
+
+Security scanning is integrated into an automated DevSecOps pipeline
+covering secret scanning, filesystem scanning, image scanning,
+reporting, and artifact storage.
+
+### Review Screenshots
+
+-   **Screenshot 5:** Successful GitHub Actions `Security Pipeline` run
+    with job steps visible.
+-   **Screenshot 6:** `security-reports` artifact visible on the
+    workflow run page.
+
+------------------------------------------------------------------------
+
+## Sprint 4 --- Centralized DevSecOps Security Observability
+
+### Goal
+
+Create one dashboard combining vulnerability, code-security,
+secret-scanning, and CI/CD pipeline metrics.
+
+### Python Prometheus Exporter
+
+A custom exporter was developed:
+
+``` text
+metrics/vulnerability_metrics.py
+```
+
+It exposes metrics at:
+
+``` text
+http://localhost:8000/metrics
+```
+
+The exporter aggregates data from:
+
+-   Trivy reports
+-   SonarCloud APIs
+-   GitLeaks scan information
+-   GitHub Actions API
+
+### Verified Current Exporter State
+
+``` text
+TRIVY:
+images = 8
+passed = 3
+failed = 5
+critical = 10
+high = 110
+medium = 236
+low = 316
+total = 672
+risk_score = 1438
+fs_critical = 2
+fs_high = 70
+
+SONARCLOUD:
+bugs = 3
+reliability_rating = 2.0
+code_smells = 19
+security_rating = 5.0
+vulnerabilities = 22
+security_hotspots = 0
+sqale_rating = 1.0
+quality_gate = ERROR
+
+GITLEAKS:
+status = PASS
+secrets = 0
+
+GITHUB ACTIONS:
+status = completed
+conclusion = success
+pipeline_metric = 1
+duration_seconds = 103
+total_runs = 24
+```
+
+These values are a point-in-time demo state and will change after new
+scans or pipeline executions.
+
+### Prometheus
+
+Prometheus scrapes the Python exporter and stores security metrics.
+
+Example metrics include:
+
+``` text
+trivy_critical_vulnerabilities
+trivy_high_vulnerabilities
+trivy_medium_vulnerabilities
+trivy_low_vulnerabilities
+trivy_risk_score
+trivy_fs_critical_vulnerabilities
+trivy_fs_high_vulnerabilities
+
+sonarcloud_bugs_total
+sonarcloud_vulnerabilities_total
+sonarcloud_code_smells_total
+sonarcloud_security_hotspots_total
+sonarcloud_security_rating
+
+gitleaks_scan_status
+gitleaks_secrets_detected_total
+
+github_actions_pipeline_status
+```
+
+### Grafana Dashboard
+
+The ScanGuard AI Grafana dashboard provides centralized visibility
+across four DevSecOps security domains.
+
+#### Trivy Container Security
+
+-   Images scanned
+-   Critical vulnerabilities
+-   High vulnerabilities
+-   Medium vulnerabilities
+-   Low vulnerabilities
+-   Failed images
+-   Passed images
+-   Overall risk score
+-   Vulnerability trend
+-   Findings by image/severity
+-   Most vulnerable images/reports
+
+#### Trivy Filesystem Security
+
+-   Filesystem critical vulnerabilities
+-   Filesystem high vulnerabilities
+
+#### SonarCloud Code Security
+
+-   Quality gate
+-   Bugs
+-   Vulnerabilities
+-   Code smells
+-   Security hotspots
+-   Security rating
+-   API/exporter status
+
+Current point-in-time state:
+
+``` text
+Quality Gate: FAILED
+Bugs: 3
+Vulnerabilities: 22
+Code Smells: 19
+Security Hotspots: 0
+Security Rating: E
+```
+
+Observed quality gate conditions showed that the new-code security
+rating condition was failing while the displayed reliability,
+maintainability, duplication, and hotspot-review conditions were OK.
+
+#### GitLeaks Secret Security
+
+``` text
+Secret Scan: PASSED
+Secrets Detected: 0
+```
+
+#### GitHub Actions Pipeline Monitoring
+
+``` text
+Latest Pipeline: SUCCESS
+Latest Duration: approximately 1.72 minutes
+Total Pipeline Runs: 24
+```
+
+### Grafana Automation
+
+PowerShell automation was introduced to reduce manual panel
+configuration.
+
+``` text
+scripts/add-sonar-grafana-panels.ps1
+scripts/add-gitleaks-grafana-panels.ps1
+scripts/cleanup-scanguard-dashboard.ps1
+```
+
+The scripts use Grafana APIs to add, update, or organize dashboard
+content.
+
+### Outcome
+
+ScanGuard AI now centralizes:
+
+``` text
+Container Security -> Trivy
+Code Security      -> SonarCloud
+Secret Security    -> GitLeaks
+Pipeline Health    -> GitHub Actions
+```
+
+through:
+
+``` text
+Python -> Prometheus -> Grafana
+```
+
+### Review Screenshots
+
+-   **Screenshot 7:** `vulnerability_metrics.py` terminal output showing
+    TRIVY, SONARCLOUD, GITLEAKS, and GITHUB ACTIONS.
+-   **Screenshot 8:** Prometheus-format metrics at port 8000 showing
+    SonarCloud and GitLeaks metrics. Never expose tokens.
+-   **Screenshot 9:** Main Grafana Trivy section showing severity
+    totals, passed/failed images, risk score, and vulnerability trend.
+-   **Screenshot 10:** Integrated Grafana section showing filesystem,
+    SonarCloud, GitLeaks, and GitHub Actions panels. This is the key
+    manager-review screenshot.
+
+# Current Project Status
+
+## Completed
+
+-   [x] Project/repository foundation
+-   [x] ShopNow demo application scanning
+-   [x] Trivy container image scanning
+-   [x] Trivy filesystem scanning
+-   [x] JSON vulnerability reports
+-   [x] Consolidated HTML report
+-   [x] Summary report generation
+-   [x] GitHub Actions security pipeline
+-   [x] Docker image build automation
+-   [x] GitLeaks secret scanning
+-   [x] GitHub Artifact report storage
+-   [x] Slack notification preparation/integration
+-   [x] SonarCloud static analysis integration
+-   [x] SonarCloud API metric collection
+-   [x] Python Prometheus exporter
+-   [x] Prometheus metric collection
+-   [x] Grafana vulnerability dashboard
+-   [x] SonarCloud Grafana metrics
+-   [x] GitLeaks Grafana metrics
+-   [x] GitHub Actions pipeline metrics
+-   [x] Grafana PowerShell/API automation
+-   [x] Centralized DevSecOps security observability proof of concept
+
+## In Progress
+
+-   [ ] Final Grafana dashboard cleanup and section organization
+-   [ ] Sprint 4 screenshots
+-   [ ] Final Sprint 4 documentation
+-   [ ] Validation of report naming and stale-report handling
+
+# Planned Enhancements
+
+## 1. Multi-Application Support
+
+The current automated pipeline is primarily configured around ShopNow.
+
+The next architecture enhancement is to make ScanGuard AI
+configuration-driven so multiple applications can be onboarded.
+
+Proposed structure:
+
+``` text
+config/
++-- applications.json
+```
+
+Concept:
+
+``` json
+{
+  "applications": [
+    {
+      "name": "shopnow",
+      "display_name": "ShopNow",
+      "source_path": "shopNow",
+      "sonar_project_key": "fancy1505_Image-Scanning-Project"
+    },
+    {
+      "name": "payment-api",
+      "display_name": "Payment API",
+      "source_path": "applications/payment-api",
+      "sonar_project_key": "example_payment-api"
+    }
+  ]
+}
+```
+
+Prometheus metrics can then use application labels:
+
+``` text
+trivy_critical_vulnerabilities{application="shopnow"} 10
+trivy_critical_vulnerabilities{application="payment-api"} 4
+```
+
+Grafana can provide an application selector so one dashboard can monitor
+multiple applications.
+
+## 2. Exception Handling and Rescanning
+
+Planned capabilities:
+
+-   Detect failed scans.
+-   Handle missing or malformed reports.
+-   Handle scanner/API failures.
+-   Track vulnerability exceptions.
+-   Record approved security exceptions.
+-   Support rescanning.
+-   Compare previous and latest results.
+-   Track detected, resolved, and pending vulnerabilities.
+-   Detect stale reports.
+
+## 3. Vulnerability Lifecycle Tracking
+
+Future states:
+
+``` text
+Detected
+Resolved
+Pending
+Reopened
+Accepted Exception
+```
+
+This will move the dashboard from current-state visualization toward
+remediation lifecycle tracking.
+
+## 4. Claude AI Security Analysis
+
+Claude AI is planned as an intelligence layer after the base platform is
+stable.
+
+It will not replace Trivy, SonarCloud, or GitLeaks. It will analyze the
+evidence produced by these tools.
+
+Planned capabilities:
+
+-   Summarize security posture.
+-   Identify highest-risk findings.
+-   Correlate container and code findings.
+-   Prioritize remediation.
+-   Explain deployment risk.
+-   Generate remediation recommendations.
+-   Produce a security release recommendation.
+
+Conceptual output:
+
+``` text
+AI Security Recommendation
+
+Risk Level: HIGH
+
+Key Observations:
+- Critical container vulnerabilities are present.
+- SonarCloud quality gate failed.
+- Security rating is E.
+- GitLeaks passed with zero detected secrets.
+- The latest GitHub Actions pipeline succeeded.
+
+Recommendation:
+Pipeline success should not be treated as security approval.
+Prioritize the SonarCloud security findings and critical container
+vulnerabilities before production promotion.
+```
+
+A key project principle is:
+
+> **A successful CI/CD pipeline does not automatically mean that an
+> application is secure.**
+
+## 5. Security Gate and Deployment Readiness
+
+A future policy layer can evaluate:
+
+-   Critical vulnerability count
+-   High vulnerability count
+-   SonarCloud quality gate
+-   SonarCloud security rating
+-   GitLeaks result
+-   Pipeline status
+
+Example:
+
+``` text
+Deployment Readiness: BLOCKED
+
+Reasons:
+- Critical vulnerabilities detected
+- SonarCloud quality gate failed
+- Security rating is E
+```
+
+# Roadmap
+
+``` text
+Sprint 1
+Foundation and Trivy Image Scanning
+        |
+        v
+Sprint 2
+Report Processing and Consolidation
+        |
+        v
+Sprint 3
+DevSecOps CI/CD Security Pipeline
+        |
+        +--> GitLeaks
+        +--> Trivy FS
+        +--> Docker Builds
+        +--> Trivy Image Scans
+        +--> Reports
+        +--> GitHub Artifacts
+        |
+        v
+Sprint 4
+Security Observability
+        |
+        +--> Python Metrics Exporter
+        +--> SonarCloud API
+        +--> GitLeaks Metrics
+        +--> GitHub Actions API
+        +--> Prometheus
+        +--> Grafana
+        |
+        v
+Centralized DevSecOps Security Dashboard
+        |
+        v
+Next Enhancement
+Multi-Application Support
+        |
+        v
+Sprint 5
+Exception Handling and Rescanning
+        |
+        v
+Future AI Enhancement
+Claude AI Security Analysis and Recommendations
+```
+
+# Key Project Achievement
+
+The main achievement is the transition from a basic container
+vulnerability scanning project into a centralized DevSecOps security
+observability proof of concept.
+
+The current platform correlates security signals from:
+
+``` text
+Trivy
+SonarCloud
+GitLeaks
+GitHub Actions
+```
+
+using:
+
+``` text
+Python
+Prometheus
+Grafana
+```
+
+The result is one dashboard for container risk, filesystem risk,
+application code security, secret detection, and CI/CD pipeline health.
+
+# Current Limitations
+
+-   The automated workflow is primarily configured for ShopNow.
+-   SonarCloud metrics currently represent the configured SonarCloud
+    project.
+-   Local dashboard services must currently be running for the local
+    demonstration.
+-   Historical vulnerability lifecycle tracking requires enhancement.
+-   Approved security exception management is not yet implemented.
+-   Rescanning automation is not yet complete.
+-   Claude AI recommendations are planned but not yet implemented.
+-   Final dashboard cleanup and presentation formatting are in progress.
+
+# Recommended Manager Review Demo Flow
+
+1.  Explain the problem: security results are fragmented across tools.
+2.  Show the repository structure.
+3.  Show the GitHub Actions Security Pipeline.
+4.  Show generated reports and GitHub Artifacts.
+5.  Show the Python exporter aggregating four integrations.
+6.  Explain Prometheus as the metric collection layer.
+7.  Show the Grafana dashboard.
+8.  Highlight the key security insight: the latest CI/CD pipeline
+    succeeded and GitLeaks passed, but SonarCloud's quality gate failed
+    and its security rating is E. Pipeline success alone is therefore
+    not security approval.
+9.  Explain multi-application support as the next platform enhancement.
+10. Explain Claude AI as the future recommendation and prioritization
+    layer.
+
+# Manager Review Summary
+
+> ScanGuard AI started as a container image vulnerability scanner. I
+> expanded it into a DevSecOps security observability proof of concept.
+> The current solution integrates Trivy for container and filesystem
+> vulnerabilities, GitLeaks for secret detection, SonarCloud for static
+> code security analysis, and GitHub Actions for CI/CD monitoring. A
+> custom Python exporter aggregates these security signals, Prometheus
+> collects the metrics, and Grafana provides a centralized security
+> dashboard. ShopNow is currently the first demo application. The next
+> enhancement is to remove application-specific hard coding and add
+> multi-application support. After the platform becomes
+> configuration-driven, the planned Claude AI layer will prioritize risk
+> and provide contextual security recommendations.
+
+# Disclaimer
+
+ScanGuard AI is currently a capstone/proof-of-concept implementation.
+Production deployment would require additional authentication, secrets
+management, persistent monitoring infrastructure, policy governance,
+access controls, exception approval workflows, and operational
+hardening.
+
+# Final Sprint 4 Review Status
+
+Sprint 4 is complete up to the current implementation baseline.
+
+The current ScanGuard AI proof of concept includes Trivy container and
+filesystem vulnerability scanning, GitLeaks secret detection, SonarCloud
+code-security metrics, GitHub Actions pipeline monitoring, a custom
+Python Prometheus exporter, Prometheus metric collection, Grafana
+visualization, and PowerShell-based Grafana dashboard automation and
+cleanup.
+
+The cleaned dashboard is organized into the following security areas:
+
+``` text
+Trivy Container Security
+Trivy Filesystem Security
+SonarCloud Code Security
+Secrets and CI/CD Pipeline
+```
+
+The next planned development activity is **multi-application support**.
+After the platform becomes configuration-driven, the roadmap continues
+with exception handling and rescanning, vulnerability lifecycle
+tracking, and Claude AI security analysis.
+
+
+
+## Final Screenshot Checklist Before Manager Review
+
+1.  Repository structure in VS Code.
+2.  Trivy JSON reports in the reports directory.
+3.  Consolidated HTML security report.
+4.  Reports directory with summary and scanner outputs.
+5.  Successful GitHub Actions Security Pipeline run.
+6.  GitHub `security-reports` artifact.
+7.  Python exporter output showing TRIVY, SONARCLOUD, GITLEAKS, and
+    GITHUB ACTIONS.
+8.  Prometheus-format security metrics without tokens or passwords.
+9.  Cleaned Grafana Trivy security section.
+10. Cleaned integrated Grafana dashboard showing filesystem, SonarCloud,
+    GitLeaks, and GitHub Actions panels.
+
+**Primary manager-review evidence:** the cleaned integrated Grafana
+dashboard.
