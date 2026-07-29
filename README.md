@@ -20,6 +20,15 @@ To:
 
 <img width="864" height="1821" alt="image" src="https://github.com/user-attachments/assets/d1a96550-86fc-4efa-9487-e2ee08ec9b81" />
 
+## infographic that tells the story of our capstone—from the problem we set out to solve, through the DevSecOps architecture and CI/CD pipeline, to the dashboard, reports, monitoring, and final outcomes.
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/55465c94-a3b0-42be-826f-2eaa4ce1b31d" />
+
+# Dashboard Screenshot (Our implementation)
+<img width="2877" height="1026" alt="image" src="https://github.com/user-attachments/assets/1e24eddf-f2f1-4b5a-b0ec-fe2865d83eb9" />
+<img width="2871" height="1156" alt="image" src="https://github.com/user-attachments/assets/6985646f-811d-4a50-aa0e-f284f8b4c7e2" />
+<img width="2180" height="1291" alt="image" src="https://github.com/user-attachments/assets/7af2314b-7a54-4d69-a60c-8ebefa540028" />
+<img width="2214" height="1401" alt="image" src="https://github.com/user-attachments/assets/bf228659-4d05-431a-9b7b-43c9027c797f" />
+
 
 
 ----
