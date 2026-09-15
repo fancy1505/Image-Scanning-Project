@@ -2287,3 +2287,1835 @@ a {
     grid-template-columns: 1fr;
   }
 }
+/* =========================================================
+   SCANGUARD AI — SAP TRANSPORT INTELLIGENCE
+   Client-facing UX
+   ========================================================= */
+
+.sap-transport-analyzer {
+  margin: 32px 0;
+  padding: 32px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 85% 5%, rgba(72, 112, 255, 0.18), transparent 30%),
+    linear-gradient(145deg, #0b1020 0%, #11182a 50%, #0b1020 100%);
+  color: #f5f7fb;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 25px 70px rgba(0,0,0,0.28);
+}
+
+.analyzer-product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.analyzer-product-header h2 {
+  margin: 8px 0;
+  font-size: 32px;
+  letter-spacing: -0.8px;
+}
+
+.analyzer-product-header p {
+  margin: 0;
+  color: #9da8bd;
+  font-size: 15px;
+}
+
+.product-status {
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 12px #4ade80;
+}
+
+/* COMMAND BAR */
+
+.transport-command-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 22px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.command-title {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.command-title span,
+.score-label,
+.gate-label,
+.explanation-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  color: #7f8ba3;
+}
+
+.command-title strong {
+  font-size: 16px;
+}
+
+.transport-command-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.selector-field select {
+  min-width: 220px;
+  height: 46px;
+  padding: 0 40px 0 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0b1020;
+  color: white;
+  font-weight: 700;
+  outline: none;
+}
+
+.analyze-button {
+  height: 46px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6d7cff, #8b5cf6);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.analyze-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(109,124,255,0.3);
+}
+
+.analyze-button span {
+  margin-right: 7px;
+}
+
+/* JOURNEY */
+
+.transport-journey {
+  display: flex;
+  align-items: center;
+  padding: 28px 12px 18px;
+}
+
+.journey-node {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.journey-node > span {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #252d42;
+  color: #8792a8;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.journey-node.active > span {
+  background: #5b6cff;
+  color: white;
+  box-shadow: 0 0 18px rgba(91,108,255,.35);
+}
+
+.journey-node strong {
+  display: block;
+  font-size: 13px;
+}
+
+.journey-node small {
+  color: #69758c;
+  font-size: 10px;
+}
+
+.journey-line {
+  flex: 1;
+  height: 1px;
+  margin: 0 15px;
+  background: linear-gradient(
+    90deg,
+    rgba(91,108,255,.6),
+    rgba(255,255,255,.1)
+  );
+}
+
+/* HEALTH HERO */
+
+.transport-health-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.035);
+}
+
+.health-score-section,
+.deployment-gate,
+.health-explanation {
+  padding: 28px;
+}
+
+.health-score-section {
+  border-right: 1px solid rgba(255,255,255,.07);
+}
+
+.score-number {
+  margin-top: 8px;
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -4px;
+}
+
+.score-number span {
+  margin-left: 5px;
+  font-size: 18px;
+  color: #727e94;
+  letter-spacing: 0;
+}
+
+.score-caption {
+  margin-top: 8px;
+  color: #78849a;
+  font-size: 12px;
+}
+
+.deployment-gate {
+  border-right: 1px solid rgba(255,255,255,.07);
+}
+
+.gate-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.gate-status strong {
+  font-size: 32px;
+}
+
+.gate-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.07);
+  font-weight: 900;
+}
+
+.deployment-gate small {
+  color: #7d899e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.health-explanation h3 {
+  margin: 9px 0;
+  font-size: 18px;
+}
+
+.health-explanation p {
+  margin: 0;
+  color: #9ba6ba;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+/* DECISION STATES */
+
+.transport-health-hero.ready {
+  border-color: rgba(74,222,128,.25);
+}
+
+.transport-health-hero.ready .gate-status strong {
+  color: #4ade80;
+}
+
+.transport-health-hero.hold {
+  border-color: rgba(251,191,36,.25);
+}
+
+.transport-health-hero.hold .gate-status strong {
+  color: #fbbf24;
+}
+
+.transport-health-hero.block {
+  border-color: rgba(248,113,113,.3);
+}
+
+.transport-health-hero.block .gate-status strong {
+  color: #f87171;
+}
+
+/* HEALTH DOMAINS */
+
+.health-overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 32px 0 15px;
+}
+
+.health-overview-header h3 {
+  margin: 5px 0 0;
+}
+
+.transport-id {
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: rgba(255,255,255,.05);
+  color: #8d99ad;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.health-domain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.health-domain {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 90px;
+  padding: 17px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.065);
+}
+
+.health-domain-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(255,255,255,.06);
+  color: #aeb9ce;
+  font-size: 16px;
+}
+
+.health-domain-content {
+  min-width: 0;
+}
+
+.health-domain-content span {
+  display: block;
+  color: #818da3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .8px;
+}
+
+.health-domain-content strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.health-domain-content small {
+  display: block;
+  margin-top: 4px;
+  color: #69758b;
+  font-size: 10px;
+}
+
+.health-domain-indicator {
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.health-domain.healthy {
+  border-color: rgba(74,222,128,.14);
+}
+
+.health-domain.healthy .health-domain-indicator {
+  color: #4ade80;
+}
+
+.health-domain.warning {
+  border-color: rgba(251,191,36,.18);
+}
+
+.health-domain.warning .health-domain-indicator {
+  color: #fbbf24;
+}
+
+.health-domain.critical {
+  border-color: rgba(248,113,113,.2);
+}
+
+.health-domain.critical .health-domain-indicator {
+  color: #f87171;
+}
+
+/* BLOCKER */
+
+.deployment-blocker {
+  margin-top: 20px;
+  padding: 23px;
+  border-radius: 16px;
+  background: rgba(251,191,36,.045);
+  border: 1px solid rgba(251,191,36,.13);
+}
+
+.blocker-header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.blocker-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(251,191,36,.1);
+  color: #fbbf24;
+  font-weight: 900;
+}
+
+.blocker-header h3 {
+  margin: 4px 0 0;
+}
+
+.blocker-content {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.blocker-main strong {
+  font-size: 14px;
+}
+
+.blocker-main p {
+  color: #7e8a9f;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.blocker-action {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.blocker-action span {
+  color: #fbbf24;
+  font-family: monospace;
+  font-weight: 800;
+}
+
+.blocker-action p {
+  margin: 0;
+  color: #aab4c5;
+  font-size: 12px;
+}
+
+/* AI COPILOT */
+
+.ai-copilot {
+  margin-top: 20px;
+  padding: 24px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(139,92,246,.15), transparent 35%),
+    rgba(255,255,255,.035);
+  border: 1px solid rgba(139,92,246,.16);
+}
+
+.copilot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copilot-title {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.copilot-sparkle {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(139,92,246,.15);
+  color: #c4b5fd;
+  font-size: 20px;
+}
+
+.copilot-title > div:last-child > span {
+  font-size: 10px;
+  color: #a78bfa;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.copilot-title h3 {
+  margin: 4px 0 0;
+  font-size: 15px;
+}
+
+.ai-confidence {
+  text-align: right;
+}
+
+.ai-confidence span {
+  display: block;
+  color: #727e94;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.ai-confidence strong {
+  font-size: 22px;
+}
+
+.copilot-recommendation {
+  display: flex;
+  gap: 28px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.copilot-decision {
+  min-width: 110px;
+}
+
+.copilot-decision span {
+  display: block;
+  color: #727e94;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.copilot-decision strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 20px;
+}
+
+.copilot-summary p {
+  margin: 0;
+  color: #aab4c6;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* TECHNICAL EVIDENCE */
+
+.technical-evidence {
+  margin-top: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.07);
+  background: rgba(255,255,255,.025);
+  overflow: hidden;
+}
+
+.technical-evidence summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 20px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.technical-evidence summary small {
+  color: #68748a;
+  font-weight: 500;
+}
+
+.technical-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 0 15px 15px;
+}
+
+.health-card {
+  padding: 17px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+.health-card h4 {
+  margin: 0 0 13px;
+  font-size: 12px;
+}
+
+.transport-analyzer-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.045);
+}
+
+.transport-analyzer-metric:last-child {
+  border-bottom: 0;
+}
+
+.transport-analyzer-metric span {
+  color: #77839a;
+  font-size: 10px;
+}
+
+.transport-analyzer-metric strong {
+  font-size: 11px;
+}
+
+/* STATUS BADGES */
+
+.sap-status-badge {
+  display: inline-flex;
+  padding: 4px 7px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+
+.sap-status-badge.pass,
+.sap-status-badge.passed,
+.sap-status-badge.ready,
+.sap-status-badge.healthy,
+.sap-status-badge.approved {
+  background: rgba(74,222,128,.1);
+  color: #4ade80;
+}
+
+.sap-status-badge.warning,
+.sap-status-badge.high,
+.sap-status-badge.degraded,
+.sap-status-badge.not-started {
+  background: rgba(251,191,36,.1);
+  color: #fbbf24;
+}
+
+.sap-status-badge.fail,
+.sap-status-badge.failed,
+.sap-status-badge.critical,
+.sap-status-badge.blocked,
+.sap-status-badge.rejected {
+  background: rgba(248,113,113,.1);
+  color: #f87171;
+}
+
+/* OPERATIONS */
+
+.operational-health {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+.operational-health h3 {
+  margin: 0 0 15px;
+  font-size: 13px;
+}
+
+.operations-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.operations-row > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 12px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.035);
+}
+
+.operations-row span {
+  color: #78849a;
+  font-size: 10px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .transport-health-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .health-explanation {
+    grid-column: 1 / -1;
+  }
+
+  .health-domain-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .technical-evidence-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .sap-transport-analyzer {
+    padding: 18px;
+  }
+
+  .analyzer-product-header,
+  .transport-command-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .transport-command-controls {
+    flex-direction: column;
+  }
+
+  .selector-field select {
+    width: 100%;
+  }
+
+  .transport-journey {
+    overflow-x: auto;
+  }
+
+  .transport-health-hero,
+  .health-domain-grid,
+  .technical-evidence-grid,
+  .operations-row {
+    grid-template-columns: 1fr;
+  }
+
+  .health-score-section,
+  .deployment-gate {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+
+  .blocker-content {
+    grid-template-columns: 1fr;
+  }
+
+  .copilot-recommendation {
+    flex-direction: column;
+  }
+}
+/* =========================================================
+   CLICKABLE HEALTH DOMAINS
+   ========================================================= */
+
+.health-domain-button {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+
+.health-domain-button .health-domain {
+  height: 100%;
+  box-sizing: border-box;
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    background .2s ease;
+}
+
+.health-domain-button:hover .health-domain {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,.055);
+  border-color: rgba(139,92,246,.35);
+}
+
+.health-domain-button.selected .health-domain {
+  border-color: rgba(139,92,246,.55);
+  background: rgba(139,92,246,.08);
+}
+
+.domain-investigate {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  color: #8f82ff;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .7px;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.health-domain-button:hover .domain-investigate,
+.health-domain-button.selected .domain-investigate {
+  opacity: 1;
+}
+
+/* =========================================================
+   EVIDENCE PANEL
+   ========================================================= */
+
+.evidence-panel {
+  margin-top: 14px;
+  padding: 24px;
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(139,92,246,.12),
+      transparent 35%
+    ),
+    rgba(255,255,255,.035);
+  border: 1px solid rgba(139,92,246,.22);
+  animation: evidenceOpen .25s ease;
+}
+
+@keyframes evidenceOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.evidence-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.evidence-panel-header h3 {
+  margin: 5px 0 0;
+  font-size: 18px;
+}
+
+.evidence-close {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  color: #9aa6ba;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.evidence-close:hover {
+  background: rgba(255,255,255,.1);
+  color: white;
+}
+
+.evidence-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.evidence-summary > div {
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(0,0,0,.18);
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+.evidence-summary span {
+  display: block;
+  color: #68758b;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.evidence-summary strong {
+  display: block;
+  margin-top: 6px;
+  color: #f2f4f8;
+  font-size: 14px;
+}
+
+.evidence-explanation {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 15px;
+  padding: 17px;
+  border-radius: 11px;
+  background: rgba(255,255,255,.035);
+}
+
+.evidence-alert,
+.evidence-success {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: 900;
+}
+
+.evidence-alert {
+  background: rgba(251,191,36,.12);
+  color: #fbbf24;
+}
+
+.evidence-success {
+  background: rgba(74,222,128,.12);
+  color: #4ade80;
+}
+
+.evidence-explanation strong {
+  font-size: 13px;
+}
+
+.evidence-explanation p {
+  margin: 7px 0 0;
+  color: #8d99ad;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.evidence-checklist {
+  margin-top: 15px;
+}
+
+.evidence-checklist > div {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  color: #a9b3c4;
+  font-size: 12px;
+}
+
+.evidence-checklist span {
+  display: inline-block;
+  margin-right: 9px;
+  color: #4ade80;
+  font-weight: 900;
+}
+
+@media (max-width: 800px) {
+  .evidence-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .evidence-summary {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================================================
+   SAP ATTP TRANSPORT DEPLOYMENT COMMAND CENTER
+   ========================================================= */
+
+.sap-command-center {
+  width: 100%;
+  margin: 32px auto;
+  padding: 0;
+  background: #07111f;
+  border: 1px solid #1d3047;
+  border-radius: 18px;
+  overflow: hidden;
+  color: #e8f0f8;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+}
+
+/* PRODUCT HEADER */
+
+.sap-product-header {
+  padding: 34px 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(43, 128, 255, 0.16),
+      transparent 30%
+    ),
+    #091525;
+  border-bottom: 1px solid #1d3047;
+}
+
+.sap-product-label,
+.sap-copilot-label,
+.sap-attention-label,
+.sap-evidence-eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  font-weight: 800;
+  color: #68a8ff;
+}
+
+.sap-product-header h1 {
+  margin: 8px 0 6px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+}
+
+.sap-product-header p {
+  margin: 0;
+  color: #91a4b8;
+  font-size: 14px;
+}
+
+.sap-live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border: 1px solid #24415e;
+  border-radius: 20px;
+  color: #91c7ff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.sap-live-indicator span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #42d392;
+  box-shadow: 0 0 12px rgba(66, 211, 146, 0.8);
+}
+
+/* COMMAND BAR */
+
+.sap-command-bar {
+  padding: 18px 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  background: #0b1828;
+  border-bottom: 1px solid #1d3047;
+}
+
+.sap-selector-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sap-selector-group label {
+  font-size: 10px;
+  color: #71879d;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.sap-selector-group select {
+  min-width: 270px;
+  padding: 11px 14px;
+  background: #07111f;
+  color: #e8f0f8;
+  border: 1px solid #2a4059;
+  border-radius: 8px;
+  outline: none;
+  font-weight: 700;
+}
+
+.sap-analyze-button {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  background: #2f80ed;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sap-analyze-button span {
+  margin-left: 10px;
+}
+
+.sap-analyze-button:hover {
+  transform: translateY(-1px);
+  background: #3d8cf4;
+}
+
+/* TRANSPORT META */
+
+.sap-transport-meta {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 40px 1fr 1fr 1.2fr;
+  gap: 16px;
+  align-items: center;
+  padding: 20px 38px;
+  background: #081422;
+  border-bottom: 1px solid #1d3047;
+}
+
+.sap-transport-meta > div:not(.sap-flow-arrow) {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sap-transport-meta span {
+  color: #667c91;
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  font-weight: 800;
+}
+
+.sap-transport-meta strong {
+  font-size: 13px;
+  color: #dce8f4;
+}
+
+.sap-flow-arrow {
+  color: #4d91dc;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* RELEASE GATE */
+
+.sap-release-gate {
+  display: grid;
+  grid-template-columns: 220px 1px 250px 1fr;
+  min-height: 190px;
+  padding: 30px 38px;
+  gap: 30px;
+  align-items: center;
+  background:
+    radial-gradient(
+      circle at 15% 50%,
+      rgba(52, 211, 153, 0.06),
+      transparent 30%
+    ),
+    #0b1726;
+  border-bottom: 1px solid #1d3047;
+}
+
+.sap-release-gate.hold {
+  background:
+    radial-gradient(
+      circle at 15% 50%,
+      rgba(245, 158, 11, 0.09),
+      transparent 30%
+    ),
+    #0b1726;
+}
+
+.sap-release-gate.block {
+  background:
+    radial-gradient(
+      circle at 15% 50%,
+      rgba(239, 68, 68, 0.1),
+      transparent 30%
+    ),
+    #0b1726;
+}
+
+.sap-score-label {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  color: #6f8498;
+  font-weight: 800;
+}
+
+.sap-score {
+  margin: 7px 0 8px;
+  font-size: 54px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -3px;
+}
+
+.sap-score span {
+  margin-left: 4px;
+  font-size: 18px;
+  color: #71879b;
+  letter-spacing: 0;
+}
+
+.sap-gate-divider {
+  width: 1px;
+  height: 90px;
+  background: #263b52;
+}
+
+.sap-decision {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 31px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.sap-release-gate.ready .sap-decision {
+  color: #43d39e;
+}
+
+.sap-release-gate.hold .sap-decision {
+  color: #f5b942;
+}
+
+.sap-release-gate.block .sap-decision {
+  color: #ff6363;
+}
+
+.sap-decision-message {
+  max-width: 260px;
+  margin-top: 7px;
+  color: #93a6b9;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.sap-ai-assessment strong {
+  display: block;
+  margin-top: 9px;
+  max-width: 600px;
+  color: #e6eef7;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.sap-ai-assessment p {
+  max-width: 600px;
+  margin: 8px 0 0;
+  color: #8fa2b5;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* STATUS BADGES */
+
+.sap-status-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+.sap-status-badge.success {
+  background: rgba(52, 211, 153, 0.1);
+  color: #52d7a1;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.sap-status-badge.warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f5b942;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+}
+
+.sap-status-badge.danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ff6767;
+  border: 1px solid rgba(239, 68, 68, 0.28);
+}
+
+.sap-status-badge.neutral {
+  background: rgba(148, 163, 184, 0.1);
+  color: #a4b4c5;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+/* SECTION HEADING */
+
+.sap-section-heading {
+  padding: 30px 38px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.sap-section-heading span {
+  color: #668198;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+
+.sap-section-heading h2 {
+  margin: 5px 0 0;
+  font-size: 20px;
+}
+
+.sap-section-heading p {
+  margin: 0;
+  color: #71869a;
+  font-size: 12px;
+}
+
+/* HEALTH GRID */
+
+.sap-health-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 38px 28px;
+}
+
+.sap-domain-card {
+  position: relative;
+  text-align: left;
+  padding: 20px;
+  min-height: 175px;
+  border: 1px solid #1d3249;
+  border-radius: 11px;
+  background: #0b1929;
+  color: #e7eef6;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sap-domain-card:hover,
+.sap-domain-card.active {
+  transform: translateY(-2px);
+  border-color: #3e78ad;
+  background: #0e2033;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.sap-domain-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sap-domain-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #10263d;
+  color: #6eaff2;
+  font-size: 16px;
+}
+
+.sap-domain-title {
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.sap-domain-subtitle {
+  margin-top: 4px;
+  color: #6f8599;
+  font-size: 11px;
+}
+
+.sap-domain-metrics {
+  display: flex;
+  gap: 25px;
+  margin-top: 18px;
+}
+
+.sap-mini-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sap-mini-metric span {
+  color: #667d91;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.sap-mini-metric strong {
+  color: #dce7f1;
+  font-size: 11px;
+}
+
+.sap-investigate {
+  position: absolute;
+  bottom: 16px;
+  right: 18px;
+  color: #5796d6;
+  font-size: 10px;
+  font-weight: 800;
+  opacity: 0.65;
+}
+
+/* EVIDENCE PANEL */
+
+.sap-evidence-panel {
+  margin: 0 38px 28px;
+  padding: 24px;
+  background: #0a1725;
+  border: 1px solid #2b4967;
+  border-radius: 12px;
+  animation: sapEvidenceOpen 0.22s ease;
+}
+
+@keyframes sapEvidenceOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sap-evidence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sap-evidence-header h3 {
+  margin: 6px 0 0;
+  font-size: 17px;
+}
+
+.sap-evidence-close {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #2a425c;
+  border-radius: 50%;
+  background: transparent;
+  color: #9eb0c2;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.sap-evidence-summary {
+  padding: 15px;
+  border-left: 3px solid #3d91e8;
+  background: #0e2135;
+  color: #a6b8c9;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.sap-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.sap-evidence-grid > div {
+  padding: 13px;
+  border: 1px solid #1d3248;
+  border-radius: 8px;
+  background: #0c1b2b;
+}
+
+.sap-evidence-grid span {
+  display: block;
+  color: #687f94;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.sap-evidence-grid strong {
+  display: block;
+  margin-top: 6px;
+  color: #dce8f2;
+  font-size: 12px;
+}
+
+.sap-evidence-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.sap-evidence-checklist div {
+  padding: 11px 13px;
+  border-radius: 7px;
+  background: #0d2033;
+  color: #a6b8ca;
+  font-size: 11px;
+}
+
+/* ATTENTION */
+
+.sap-attention-panel {
+  margin: 0 38px 28px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #111d2b;
+  border: 1px solid #5a4823;
+  border-radius: 11px;
+}
+
+.sap-attention-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.1);
+  color: #f5b942;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.sap-attention-content {
+  flex: 1;
+}
+
+.sap-attention-content h3 {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.sap-attention-content p {
+  margin: 0;
+  max-width: 800px;
+  color: #91a4b7;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.sap-evidence-button {
+  flex-shrink: 0;
+  padding: 10px 15px;
+  border: 1px solid #315373;
+  border-radius: 7px;
+  background: transparent;
+  color: #70aff0;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* AI COPILOT */
+
+.sap-copilot {
+  margin: 0 38px 28px;
+  padding: 25px;
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      rgba(84, 133, 255, 0.1),
+      transparent 35%
+    ),
+    #0b1829;
+  border: 1px solid #263e59;
+  border-radius: 12px;
+}
+
+.sap-copilot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sap-copilot-header h2 {
+  margin: 5px 0 0;
+  font-size: 19px;
+}
+
+.sap-confidence {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 3px;
+}
+
+.sap-confidence span {
+  color: #6b8196;
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: 800;
+}
+
+.sap-confidence strong {
+  color: #70aff0;
+  font-size: 20px;
+}
+
+.sap-copilot-decision {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.sap-copilot-status {
+  min-width: 100px;
+  padding: 12px 18px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.sap-copilot-status.ready {
+  background: rgba(52, 211, 153, 0.1);
+  color: #52d7a1;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.sap-copilot-status.hold {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f5b942;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.sap-copilot-status.block {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ff6565;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.sap-copilot-decision h3 {
+  margin: 0 0 5px;
+  font-size: 15px;
+}
+
+.sap-copilot-decision p {
+  margin: 0;
+  color: #91a5b8;
+  font-size: 12px;
+}
+
+.sap-next-actions {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #1d3147;
+}
+
+.sap-next-title {
+  margin-bottom: 12px;
+  color: #8297aa;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.sap-action-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.sap-action-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #0d2032;
+}
+
+.sap-action-item span {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #18334e;
+  color: #6baaf0;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.sap-action-item p {
+  margin: 2px 0 0;
+  color: #a5b7c8;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* OPERATIONAL STRIP */
+
+.sap-operational-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid #1d3047;
+  background: #081321;
+}
+
+.sap-operational-strip > div {
+  padding: 17px 20px;
+  border-right: 1px solid #1d3047;
+}
+
+.sap-operational-strip > div:last-child {
+  border-right: none;
+}
+
+.sap-operational-strip span {
+  display: block;
+  color: #62788d;
+  font-size: 9px;
+  letter-spacing: 0.9px;
+  font-weight: 800;
+}
+
+.sap-operational-strip strong {
+  display: block;
+  margin-top: 5px;
+  color: #cbd8e5;
+  font-size: 11px;
+}
+
+/* EMPTY */
+
+.sap-empty-state {
+  padding: 50px;
+  text-align: center;
+  color: #8195a8;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .sap-release-gate {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sap-gate-divider {
+    display: none;
+  }
+
+  .sap-ai-assessment {
+    grid-column: 1 / -1;
+  }
+
+  .sap-health-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sap-transport-meta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sap-flow-arrow {
+    display: none;
+  }
+
+  .sap-action-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .sap-product-header,
+  .sap-command-bar,
+  .sap-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sap-command-bar {
+    align-items: stretch;
+  }
+
+  .sap-selector-group select {
+    width: 100%;
+  }
+
+  .sap-analyze-button {
+    width: 100%;
+  }
+
+  .sap-transport-meta,
+  .sap-release-gate,
+  .sap-health-grid,
+  .sap-evidence-grid,
+  .sap-evidence-checklist {
+    grid-template-columns: 1fr;
+  }
+
+  .sap-release-gate {
+    gap: 20px;
+  }
+
+  .sap-attention-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sap-evidence-button {
+    width: 100%;
+  }
+
+  .sap-operational-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

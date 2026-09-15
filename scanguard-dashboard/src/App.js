@@ -5,6 +5,10 @@ import SummaryCards from "./components/SummaryCards";
 import DeploymentDecision from "./components/DeploymentDecision";
 import SeverityChart from "./components/SeverityChart";
 import InformationPanel from "./components/InformationPanel";
+import SapReleaseReadiness from "./components/SapReleaseReadiness";
+import SapAiReleaseDecision from "./components/SapAiReleaseDecision";
+import SapTransportRisk from "./components/SapTransportRisk";
+import SapTransportAnalyzer from "./components/SapTransportAnalyzer";
 
 import "./App.css";
 
@@ -399,50 +403,76 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
-
+  const [sapRelease, setSapRelease] = useState(null);
+  const [sapTransports, setSapTransports] = useState([]);
   const loadDashboardData = useCallback(async (isRefresh = false) => {
-    try {
-      if (isRefresh) {
-        setRefreshing(true);
-      } else {
-        setLoading(true);
-      }
-
-      setError("");
-
-      const cacheKey = Date.now();
-
-      const analysisResponse = await fetch(
-        `/data/ai-analysis.json?t=${cacheKey}`
-      );
-
-      if (!analysisResponse.ok) {
-        throw new Error(
-          "Could not load public/data/ai-analysis.json."
-        );
-      }
-
-      const analysisData = await analysisResponse.json();
-      setAnalysis(analysisData);
-
-      const llmResponse = await fetch(
-        `/data/ai-llm-analysis.json?t=${cacheKey}`
-      );
-
-      if (llmResponse.ok) {
-        const llmData = await llmResponse.json();
-        setLlmAnalysis(llmData);
-      } else {
-        setLlmAnalysis(null);
-      }
-    } catch (loadError) {
-      console.error(loadError);
-      setError(loadError.message);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
+  try {
+    if (isRefresh) {
+      setRefreshing(true);
+    } else {
+      setLoading(true);
     }
-  }, []);
+
+    setError("");
+
+    const cacheKey = Date.now();
+
+    // Load existing ScanGuard analysis
+    const analysisResponse = await fetch(
+      `/data/ai-analysis.json?t=${cacheKey}`
+    );
+
+    if (!analysisResponse.ok) {
+      throw new Error(
+        "Could not load public/data/ai-analysis.json."
+      );
+    }
+
+    const analysisData = await analysisResponse.json();
+    setAnalysis(analysisData);
+
+    // Load SAP ATTP release readiness
+    const sapResponse = await fetch(
+      `/data/sap-attp-release.json?t=${cacheKey}`
+    );
+
+    if (sapResponse.ok) {
+      const sapData = await sapResponse.json();
+      setSapRelease(sapData);
+    } else {
+      setSapRelease(null);
+    }
+    const transportsResponse = await fetch(
+  `/data/sap-attp-transports.json?t=${cacheKey}`
+);
+
+if (transportsResponse.ok) {
+  const transportsData = await transportsResponse.json();
+  setSapTransports(transportsData);
+} else {
+  setSapTransports([]);
+}
+
+    // Load existing LLM analysis
+    const llmResponse = await fetch(
+      `/data/ai-llm-analysis.json?t=${cacheKey}`
+    );
+
+    if (llmResponse.ok) {
+      const llmData = await llmResponse.json();
+      setLlmAnalysis(llmData);
+    } else {
+      setLlmAnalysis(null);
+    }
+
+  } catch (loadError) {
+    console.error(loadError);
+    setError(loadError.message);
+  } finally {
+    setLoading(false);
+    setRefreshing(false);
+  }
+}, []);
 
   useEffect(() => {
     loadDashboardData();
@@ -617,6 +647,12 @@ const releaseReasons = Array.isArray(rawReleaseReasons)
         </section>
 
         <SummaryCards analysis={analysis} />
+
+        {sapTransports.length > 0 && (
+  <SapTransportAnalyzer transports={sapTransports} />
+)}
+        
+
 
         <DeploymentDecision
           releaseReadiness={analysis.release_readiness}
