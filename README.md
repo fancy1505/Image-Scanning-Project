@@ -1402,14 +1402,3 @@ This is the **one visual I would definitely put in your README**:
 
 
 
-## Presentation Opening
-
-You can start tomorrow with this:
-
-> “My existing project was a DevSecOps Security Command Center focused on GitLeaks, SonarCloud, Trivy, Docker and AI-based security analysis. I extended it with an SAP ATTP Release Intelligence POC because SAP release decisions depend on evidence from multiple systems such as ATC, AIF, ActiveControl, Azure DevOps, ServiceNow and monitoring tools.
->
-> Today, I have implemented the SAP dashboard, transport analyzer and three release scenarios: READY, HOLD and BLOCK. The current version uses mock transport data to demonstrate the complete user experience. The next phase is to build a backend that accepts any transport number and retrieves live evidence from SAP or ActiveControl.”
-
-## Presentation Closing
-
-> “The objective is not to replace SIT, UAT or existing SAP controls. The objective is to correlate their evidence into one transport-level risk view and provide an explainable release recommendation with clear next actions.”
