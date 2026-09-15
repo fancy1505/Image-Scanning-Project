@@ -1,0 +1,167 @@
+[
+  {
+    "transport": {
+      "request": "DEVK900122",
+      "type": "Workbench",
+      "owner": "SAP Development",
+      "source_system": "ATTP_DEV",
+      "target_system": "ATTP_PRD",
+      "activecontrol_status": "Ready for Import"
+    },
+    "quality": {
+      "atc_status": "PASS",
+      "sonar_status": "PASS",
+      "atc_critical": 0,
+      "atc_high": 0,
+      "atc_medium": 1
+    },
+    "security": {
+      "status": "PASS",
+      "authorization_impact": "LOW",
+      "secrets_detected": 0,
+      "critical_vulnerabilities": 0
+    },
+    "integration": {
+      "aif_impact": "LOW",
+      "interface_count": 2,
+      "failed_messages": 0,
+      "status": "HEALTHY"
+    },
+    "validation": {
+      "sit_status": "PASSED",
+      "uat_status": "PASSED",
+      "regression_status": "PASSED",
+      "cab_status": "APPROVED"
+    },
+    "operations": {
+      "new_relic_health": "HEALTHY",
+      "background_jobs": "READY",
+      "user_lock_status": "READY"
+    },
+    "risk": {
+      "score": 96,
+      "level": "LOW",
+      "confidence": 97
+    },
+    "ai_recommendation": {
+      "decision": "READY",
+      "summary": "The transport passed technical, security, validation and integration readiness checks.",
+      "reason": "No blocking security, quality or integration risks were identified.",
+      "next_actions": [
+        "Proceed with production deployment through the approved release process",
+        "Monitor the application during the release window"
+      ]
+    }
+  },
+  {
+    "transport": {
+      "request": "DEVK900123",
+      "type": "Workbench",
+      "owner": "SAP Development",
+      "source_system": "ATTP_DEV",
+      "target_system": "ATTP_PRD",
+      "activecontrol_status": "Ready for Import"
+    },
+    "quality": {
+      "atc_status": "PASS",
+      "sonar_status": "WARNING",
+      "atc_critical": 0,
+      "atc_high": 1,
+      "atc_medium": 3
+    },
+    "security": {
+      "status": "PASS",
+      "authorization_impact": "LOW",
+      "secrets_detected": 0,
+      "critical_vulnerabilities": 0
+    },
+    "integration": {
+      "aif_impact": "HIGH",
+      "interface_count": 4,
+      "failed_messages": 0,
+      "status": "WARNING"
+    },
+    "validation": {
+      "sit_status": "PASSED",
+      "uat_status": "PASSED",
+      "regression_status": "PASSED",
+      "cab_status": "APPROVED"
+    },
+    "operations": {
+      "new_relic_health": "HEALTHY",
+      "background_jobs": "READY",
+      "user_lock_status": "READY"
+    },
+    "risk": {
+      "score": 87,
+      "level": "MEDIUM",
+      "confidence": 92
+    },
+    "ai_recommendation": {
+      "decision": "HOLD",
+      "summary": "The transport is technically ready, but the change has high AIF interface impact.",
+      "reason": "Additional interface validation and business confirmation are recommended before production deployment.",
+      "next_actions": [
+        "Confirm AIF interface validation with the functional team",
+        "Review interface monitoring during the release window",
+        "Confirm business readiness before production import"
+      ]
+    }
+  },
+  {
+    "transport": {
+      "request": "DEVK900124",
+      "type": "Workbench",
+      "owner": "SAP Development",
+      "source_system": "ATTP_DEV",
+      "target_system": "ATTP_PRD",
+      "activecontrol_status": "Import Blocked"
+    },
+    "quality": {
+      "atc_status": "FAIL",
+      "sonar_status": "FAIL",
+      "atc_critical": 3,
+      "atc_high": 8,
+      "atc_medium": 12
+    },
+    "security": {
+      "status": "FAIL",
+      "authorization_impact": "HIGH",
+      "secrets_detected": 2,
+      "critical_vulnerabilities": 4
+    },
+    "integration": {
+      "aif_impact": "HIGH",
+      "interface_count": 7,
+      "failed_messages": 13,
+      "status": "CRITICAL"
+    },
+    "validation": {
+      "sit_status": "FAILED",
+      "uat_status": "NOT STARTED",
+      "regression_status": "FAILED",
+      "cab_status": "REJECTED"
+    },
+    "operations": {
+      "new_relic_health": "DEGRADED",
+      "background_jobs": "NOT READY",
+      "user_lock_status": "NOT READY"
+    },
+    "risk": {
+      "score": 42,
+      "level": "CRITICAL",
+      "confidence": 99
+    },
+    "ai_recommendation": {
+      "decision": "BLOCK",
+      "summary": "The transport contains multiple blocking quality, security, integration and validation issues.",
+      "reason": "Critical ATC findings, security vulnerabilities, failed validation and AIF failures make the transport unsafe for production deployment.",
+      "next_actions": [
+        "Resolve critical ATC and security findings",
+        "Resolve failed AIF messages and validate impacted interfaces",
+        "Complete SIT, UAT and regression testing",
+        "Obtain CAB approval before reconsidering deployment"
+      ]
+    }
+  }
+]

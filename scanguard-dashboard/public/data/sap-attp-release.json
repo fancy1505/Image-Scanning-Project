@@ -1,0 +1,59 @@
+{
+  "application": "SAP ATTP",
+  "environment": "Production Release",
+  "release_id": "ATTP-REL-2026-09-001",
+  "transport": {
+    "request": "DEVK900123",
+    "type": "Workbench",
+    "owner": "SAP Development",
+    "source_system": "ATTP_DEV",
+    "target_system": "ATTP_PRD",
+    "activecontrol_status": "Ready for Import"
+  },
+  "quality": {
+    "atc_status": "PASS",
+    "critical_findings": 0,
+    "high_findings": 1,
+    "medium_findings": 3,
+    "sonar_status": "WARNING"
+  },
+  "security": {
+    "status": "PASS",
+    "authorization_impact": "LOW",
+    "secrets_detected": 0,
+    "critical_vulnerabilities": 0
+  },
+  "integration": {
+    "aif_impact": "HIGH",
+    "interface_count": 4,
+    "failed_interfaces": 0,
+    "status": "WARNING"
+  },
+  "validation": {
+    "sit_status": "PASSED",
+    "uat_status": "PASSED",
+    "regression_status": "PASSED",
+    "cab_status": "APPROVED"
+  },
+  "operations": {
+    "new_relic_health": "HEALTHY",
+    "background_jobs": "READY",
+    "user_lock_status": "READY"
+  },
+  "risk": {
+    "score": 87,
+    "level": "MEDIUM",
+    "decision": "HOLD",
+    "confidence": 92
+  },
+  "ai_recommendation": {
+    "decision": "HOLD",
+    "summary": "The transport is technically ready, but the change has high AIF interface impact.",
+    "reason": "Additional interface validation and business confirmation are recommended before production deployment.",
+    "next_actions": [
+      "Confirm AIF interface validation with the functional team",
+      "Review interface monitoring during the release window",
+      "Confirm business readiness before production import"
+    ]
+  }
+}
